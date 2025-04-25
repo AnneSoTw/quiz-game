@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Quiz Challenge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <style>
+        /* --- Wedding Theme Styles --- */
+        body {
+            font-family: 'Merriweather', serif;
+            background: linear-gradient(to bottom, #f5f0e8, #e6dacb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+            color: #5d4037;
+        }
+        .game-container {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 650px;
+            text-align: center;
+            border: 1px solid #d7ccc8;
+        }
+        .romantic-font {
+            font-family: 'Dancing Script', cursive;
+            color: #8d6e63;
+        }
+        .game-button {
+            font-family: 'Merriweather', serif;
+            font-weight: bold;
+            background-image: linear-gradient(to right, #d4af37, #c09b2d);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 1.5rem;
+            display: inline-block;
+        }
+        .game-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            filter: brightness(1.05);
+        }
+        .game-button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .option-button {
+            display: block;
+            width: 100%;
+            background-color: #f5f5f5;
+            color: #5d4037;
+            padding: 0.85rem;
+            margin-top: 0.85rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e0e0e0;
+            transition: all 0.2s ease;
+            text-align: left;
+            font-size: 0.95rem;
+            font-family: 'Merriweather', serif;
+        }
+        .option-button:hover {
+            border-color: #d4af37;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .modal {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(93, 64, 55, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: #fffdf9;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 90%;
+            width: 450px;
+            border: 1px solid #e0e0e0;
+        }
+        .modal-message {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: #5d4037;
+        }
+        .modal-button {
+             font-family: 'Merriweather', serif;
+             font-weight: bold;
+             background-color: #a5d6a7;
+             color: #388e3c;
+             padding: 0.6rem 1.2rem;
+             border: none;
+             border-radius: 2rem;
+             cursor: pointer;
+             transition: background-color 0.3s ease;
+             font-size: 0.8rem;
+             text-transform: uppercase;
+        }
+         .modal-button:hover {
+             background-color: #81c784;
+         }
+         /* Award Certificate */
+         .award-certificate {
+            border: 8px double #c09b2d;
+            padding: 2rem;
+            margin-top: 2.5rem;
+            background-color: #fffaf0;
+            border-radius: 0.5rem;
+            position: relative; /* Keep relative for potential future absolute elements inside */
+            text-align: center; /* Center align contents */
+         }
+         .award-title {
+            font-family: 'Dancing Script', cursive;
+            color: #a1887f;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+         }
+         .award-text {
+            color: #795548;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem; /* Add space below text */
+         }
+         .award-seal {
+            /* Removed position: absolute */
+            display: inline-flex; /* Use inline-flex to center content */
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            background-color: #e57373;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            font-family: sans-serif;
+            margin-top: 1rem; /* Add space above the seal */
+         }
+         .award-seal::before {
+            content: '♥';
+         }
+         /* Style for the new text below the seal */
+         .save-the-date-text {
+            margin-top: 0.75rem; /* Space below seal */
+            font-size: 0.9rem;
+            color: #a1887f; /* Muted brown */
+            font-weight: bold;
+         }
+         /* Style for email status message */
+        #email-status {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .email-success { color: #388e3c; }
+        .email-error { color: #c62828; }
+        .email-sending { color: #6d4c41; }
+        /* Input field styling */
+        input[type="text"], input[type="email"] {
+            font-family: 'Merriweather', serif;
+            border: 1px solid #d7ccc8;
+            border-radius: 0.5rem;
+        }
+        input[type="text"]:focus, input[type="email"]:focus {
+             border-color: #d4af37;
+             box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+             outline: none;
+        }
+        /* Score/Timer Text */
+        .score-time-text {
+            font-family: 'Merriweather', serif;
+            font-weight: bold;
+            color: #8d6e63;
+        }
+        .question-info-text {
+             color: #a1887f;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="game-container">
+
+        <div id="start-screen">
+            <h1 class="text-4xl font-bold mb-6 romantic-font">Wedding Quiz!</h1>
+            <p class="mb-5 text-gray-600">Please enter your details:</p>
+            <input type="text" id="nickname" placeholder="Your Name" class="w-full p-3 border rounded-lg mb-3 focus:outline-none" required>
+            <input type="email" id="email" placeholder="Your Email" class="w-full p-3 border rounded-lg mb-4 focus:outline-none" required>
+            <button id="start-button" class="game-button">Start Quiz</button>
+            <p id="start-error" class="text-red-600 mt-3 text-sm"></p>
+        </div>
+
+        <div id="quiz-screen" class="hidden">
+            <div class="flex justify-between items-center mb-4 text-sm question-info-text">
+                 <div>Question <span id="question-number">1</span> of <span id="total-questions"></span></div>
+                 <div class="score-time-text">Score: <span id="current-score">0</span></div>
+            </div>
+            <div id="timer" class="text-right text-lg font-semibold mb-5 score-time-text">Time: 0s</div>
+            <h2 id="question-text" class="text-xl font-semibold mb-6 text-gray-800">Question text goes here...</h2>
+            <div id="options-container">
+                </div>
+        </div>
+
+        <div id="results-screen" class="hidden">
+             <h1 class="text-4xl font-bold mb-5 romantic-font">Quiz Complete!</h1>
+            <p class="text-lg mb-2 text-gray-700">Congratulations, <span id="result-nickname" class="font-semibold"></span>!</p>
+            <p class="text-lg mb-2 text-gray-700">Your Score: <span id="final-score" class="score-time-text">0</span> / <span id="total-score" class="score-time-text"></span></p>
+            <p class="text-lg mb-4 text-gray-700">Time Taken: <span id="final-time" class="score-time-text">0</span> seconds</p>
+
+            <div id="email-status"></div>
+
+            <div class="award-certificate">
+                 <div class="award-title">Certificate of Fun!</div>
+                 <div class="award-text">
+                     This certificate is happily presented to
+                     <br><strong id="award-nickname" class="text-lg"></strong><br>
+                     for celebrating with us and completing the Wedding Quiz on
+                     <span id="completion-date"></span>
+                     with a score of <strong id="award-score" class="score-time-text"></strong> and a time of <strong id="award-time" class="score-time-text"></strong> seconds.
+                 </div>
+                 <div class="award-seal"></div>
+                 <p class="save-the-date-text">MAS - Save the date 2222/02/02</p>
+            </div>
+         </div>
+
+    </div>
+
+    <div id="feedback-modal" class="modal">
+        <div class="modal-content">
+            <p id="modal-message" class="modal-message">Feedback message here.</p>
+            <button id="modal-close-button" class="modal-button">Next Question</button>
+        </div>
+    </div>
+
+    <script>
+        // --- EmailJS Configuration ---
+        const EMAILJS_SERVICE_ID = 'service_3qozdwc';
+        const EMAILJS_TEMPLATE_ID = 'template_q69067c';
+        const EMAILJS_PUBLIC_KEY = 'cDxOmMxePGWSWrLPG';
+
+        // --- Questions Data ---
+        const questions = [
+             // Keep your questions here...
+             { question: "What is the capital of France?", options: ["Berlin", "Madrid", "Paris", "Rome"], correctAnswerIndex: 2, incorrectFeedback: ["Berlin is the capital of Germany.", "Madrid is the capital of Spain.", "Rome is the capital of Italy."] },
+             { question: "Which planet is known as the Red Planet?", options: ["Earth", "Mars", "Jupiter", "Saturn"], correctAnswerIndex: 1, incorrectFeedback: ["Earth is our home planet, mostly blue and green!", "Jupiter is the largest planet, a gas giant.", "Saturn is famous for its rings."] },
+             { question: "What is the largest mammal?", options: ["Elephant", "Blue Whale", "Giraffe", "Great White Shark"], correctAnswerIndex: 1, incorrectFeedback: ["Elephants are the largest land mammals.", "Giraffes are the tallest mammals.", "Great White Sharks are fish, not mammals."] },
+             { question: "What is 2 + 2?", options: ["3", "4", "5", "6"], correctAnswerIndex: 1, incorrectFeedback: ["Think a bit harder!", "Are you sure?", "That's too high!"] },
+             { question: "What is the square root of 144?", options: ["10", "11", "12", "13"], correctAnswerIndex: 2, incorrectFeedback: ["10 * 10 is 100.", "11 * 11 is 121.", "13 * 13 is 169."] },
+             { question: "In which year did World War II end?", options: ["1943", "1944", "1945", "1946"], correctAnswerIndex: 2, incorrectFeedback: ["The war was still ongoing.", "Very close, but not quite.", "The war had already ended by then."] },
+             { question: "What element does 'O' represent on the periodic table?", options: ["Gold", "Oxygen", "Osmium", "Olive"], correctAnswerIndex: 1, incorrectFeedback: ["Gold is Au.", "Osmium is Os.", "Olive is a fruit, not an element!"] },
+             { question: "Who painted the Mona Lisa?", options: ["Michelangelo", "Raphael", "Leonardo da Vinci", "Donatello"], correctAnswerIndex: 2, incorrectFeedback: ["Michelangelo is famous for the Sistine Chapel ceiling.", "Raphael painted 'The School of Athens'.", "Donatello was primarily a sculptor."] },
+             { question: "What is the longest river in the world?", options: ["Amazon River", "Nile River", "Mississippi River", "Yangtze River"], correctAnswerIndex: 1, incorrectFeedback: ["The Amazon is a strong contender, but traditionally the Nile is considered longer.", "The Mississippi is the longest in North America.", "The Yangtze is the longest in Asia."] },
+             { question: "What is the currency of Japan?", options: ["Won", "Yuan", "Yen", "Dollar"], correctAnswerIndex: 2, incorrectFeedback: ["Won is the currency of South Korea.", "Yuan is the currency of China.", "Dollar is used in many countries, but not Japan's primary currency."] },
+             { question: "How many continents are there?", options: ["5", "6", "7", "8"], correctAnswerIndex: 2, incorrectFeedback: ["There are more than that!", "Almost, just one more!", "That's one too many!"] },
+             { question: "What is the boiling point of water in Celsius?", options: ["90°C", "100°C", "110°C", "0°C"], correctAnswerIndex: 1, incorrectFeedback: ["It needs to be a bit hotter.", "That's too hot!", "That's the freezing point!"] },
+             { question: "Which country is known as the Land of the Rising Sun?", options: ["China", "South Korea", "Japan", "Thailand"], correctAnswerIndex: 2, incorrectFeedback: ["China has a different nickname.", "South Korea is nearby, but not the one.", "Thailand is known as the Land of Smiles."] },
+             { question: "What is the main ingredient in guacamole?", options: ["Tomato", "Onion", "Avocado", "Lime"], correctAnswerIndex: 2, incorrectFeedback: ["Tomatoes are often included, but not the main star.", "Onions add flavor, but aren't the base.", "Lime juice is used for tang, not the bulk."] },
+             { question: "Who wrote 'Hamlet'?", options: ["Charles Dickens", "William Shakespeare", "Jane Austen", "Leo Tolstoy"], correctAnswerIndex: 1, incorrectFeedback: ["Dickens wrote novels like 'Oliver Twist'.", "Austen wrote 'Pride and Prejudice'.", "Tolstoy wrote 'War and Peace'."] },
+             { question: "What is the hardest natural substance on Earth?", options: ["Gold", "Iron", "Diamond", "Quartz"], correctAnswerIndex: 2, incorrectFeedback: ["Gold is relatively soft.", "Iron is strong, but not the hardest.", "Quartz is hard, but diamond is harder."] },
+             { question: "How many sides does a hexagon have?", options: ["5", "6", "7", "8"], correctAnswerIndex: 1, incorrectFeedback: ["That's a pentagon.", "That's a heptagon.", "That's an octagon."] },
+             { question: "What is the capital of Australia?", options: ["Sydney", "Melbourne", "Canberra", "Brisbane"], correctAnswerIndex: 2, incorrectFeedback: ["Sydney is the largest city, but not the capital.", "Melbourne is another major city, known for culture.", "Brisbane is the capital of Queensland."] },
+             { question: "Which gas do plants absorb from the atmosphere?", options: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"], correctAnswerIndex: 2, incorrectFeedback: ["Plants release oxygen during photosynthesis.", "Nitrogen is abundant but absorbed differently (often via soil).", "Hydrogen is the lightest element."] },
+             { question: "Final Question: Ready for the wedding?", options: ["Yes!", "Absolutely!", "Can't wait!", "Let's celebrate!"], correctAnswerIndex: 0, incorrectFeedback: ["Wonderful!", "Great!", "Fantastic!"] }
+        ];
+
+        // --- DOM Elements ---
+        // (Get elements as before...)
+        const startScreen = document.getElementById('start-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const resultsScreen = document.getElementById('results-screen');
+        const startButton = document.getElementById('start-button');
+        const nicknameInput = document.getElementById('nickname');
+        const emailInput = document.getElementById('email');
+        const startError = document.getElementById('start-error');
+        const questionNumberEl = document.getElementById('question-number');
+        const totalQuestionsEl = document.getElementById('total-questions');
+        const currentScoreEl = document.getElementById('current-score');
+        const timerEl = document.getElementById('timer');
+        const questionTextEl = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const feedbackModal = document.getElementById('feedback-modal');
+        const modalMessageEl = document.getElementById('modal-message');
+        const modalCloseButton = document.getElementById('modal-close-button');
+        const resultNicknameEl = document.getElementById('result-nickname');
+        const finalScoreEl = document.getElementById('final-score');
+        const totalScoreEl = document.getElementById('total-score');
+        const finalTimeEl = document.getElementById('final-time');
+        const awardNicknameEl = document.getElementById('award-nickname');
+        const awardScoreEl = document.getElementById('award-score');
+        const awardTimeEl = document.getElementById('award-time');
+        const completionDateEl = document.getElementById('completion-date');
+        const emailStatusEl = document.getElementById('email-status');
+
+        // --- Game State ---
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let timerInterval;
+        let secondsElapsed = 0;
+        let userNickname = '';
+        let userEmail = '';
+        let quizStartTime;
+        let userAnswers = []; // <-- New array to store detailed answers
+
+        // --- Functions ---
+
+        function startTimer() {
+            quizStartTime = Date.now();
+            timerInterval = setInterval(() => {
+                secondsElapsed = Math.floor((Date.now() - quizStartTime) / 1000);
+                timerEl.textContent = `Time: ${secondsElapsed}s`;
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+        }
+
+        function showQuestion(index) {
+            if (index >= questions.length) {
+                endQuiz();
+                return;
+            }
+
+            const question = questions[index];
+            questionNumberEl.textContent = index + 1;
+            totalQuestionsEl.textContent = questions.length; // Ensure total is set
+            questionTextEl.textContent = question.question;
+            optionsContainer.innerHTML = '';
+
+            question.options.forEach((option, i) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('option-button');
+                // Pass current question object to handleAnswer
+                button.onclick = () => handleAnswer(i, question);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function handleAnswer(selectedIndex, question) {
+            const buttons = optionsContainer.querySelectorAll('button');
+            buttons.forEach(button => button.disabled = true);
+
+            const correctIndex = question.correctAnswerIndex;
+            const isCorrect = selectedIndex === correctIndex;
+            let feedbackMsg = '';
+
+            if (isCorrect) {
+                score++;
+                currentScoreEl.textContent = score;
+                feedbackMsg = "Correct! You know your stuff!";
+            } else {
+                let feedbackIndex = selectedIndex < correctIndex ? selectedIndex : selectedIndex - 1;
+                feedbackMsg = question.incorrectFeedback[feedbackIndex] || "Not quite, but keep trying!";
+            }
+
+            // --- Store detailed answer ---
+            userAnswers.push({
+                question: question.question,
+                selectedAnswer: question.options[selectedIndex],
+                correctAnswer: question.options[correctIndex],
+                isCorrect: isCorrect
+            });
+            // --- End store detailed answer ---
+
+            showFeedbackModal(feedbackMsg);
+        }
+
+        function showFeedbackModal(message) {
+            modalMessageEl.textContent = message;
+            feedbackModal.classList.add('show');
+        }
+
+        function hideFeedbackModal() {
+            feedbackModal.classList.remove('show');
+            currentQuestionIndex++;
+            showQuestion(currentQuestionIndex);
+        }
+
+        function formatDetailedResults() {
+            // Formats the userAnswers array into a string for the email body
+            // Using \n for line breaks in plain text email. Use <br> if your template supports HTML.
+            let resultsString = "Detailed Results:\n--------------------\n";
+            userAnswers.forEach((answer, index) => {
+                resultsString += `Q${index + 1}: ${answer.question}\n`;
+                resultsString += `  Your Answer: ${answer.selectedAnswer} (${answer.isCorrect ? 'Correct' : 'Incorrect'})\n`;
+                if (!answer.isCorrect) {
+                    resultsString += `  Correct Answer: ${answer.correctAnswer}\n`;
+                }
+                resultsString += "--------------------\n";
+            });
+            return resultsString;
+        }
+
+        function sendResultsEmail() {
+            emailStatusEl.textContent = 'Sending results...';
+            emailStatusEl.className = 'email-sending';
+
+            // --- Format detailed results for email ---
+            const detailedResultsText = formatDetailedResults();
+            // --- End format detailed results ---
+
+            const templateParams = {
+                nickname: userNickname,
+                email: userEmail,
+                score: score,
+                total_questions: questions.length,
+                time: secondsElapsed,
+                detailed_results: detailedResultsText // <-- Add detailed results here
+            };
+
+            // Check if EmailJS IDs are placeholders
+            if (!EMAILJS_SERVICE_ID || EMAILJS_SERVICE_ID === 'YOUR_SERVICE_ID' ||
+                !EMAILJS_TEMPLATE_ID || EMAILJS_TEMPLATE_ID === 'YOUR_TEMPLATE_ID' ||
+                !EMAILJS_PUBLIC_KEY || EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
+
+                console.warn("EmailJS credentials are placeholders. Skipping email send.");
+                emailStatusEl.textContent = 'Email sending not configured.';
+                emailStatusEl.className = 'email-error';
+                return;
+            }
+
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
+                .then((response) => {
+                   console.log('EmailJS SUCCESS!', response.status, response.text);
+                   emailStatusEl.textContent = 'Results sent successfully!';
+                   emailStatusEl.className = 'email-success';
+                }, (error) => {
+                   console.error('EmailJS FAILED...', error);
+                   // Provide more specific error feedback if possible
+                   let errorMsg = 'Failed to send results. Please check configuration.';
+                   if (error.status === 400) { // Example: Bad request often means template param mismatch
+                       errorMsg = 'Failed to send results. Check EmailJS template parameters.';
+                   }
+                   emailStatusEl.textContent = errorMsg;
+                   emailStatusEl.className = 'email-error';
+                });
+        }
+
+
+        function endQuiz() {
+            stopTimer();
+            quizScreen.classList.add('hidden');
+            resultsScreen.classList.remove('hidden');
+
+            // Display final results
+            resultNicknameEl.textContent = userNickname;
+            finalScoreEl.textContent = score;
+            totalScoreEl.textContent = questions.length;
+            finalTimeEl.textContent = secondsElapsed;
+
+            // Populate certificate
+            awardNicknameEl.textContent = userNickname;
+            const awardScoreText = `${score} / ${questions.length}`;
+            awardScoreEl.textContent = awardScoreText;
+            awardTimeEl.textContent = secondsElapsed;
+            completionDateEl.textContent = new Date().toLocaleDateString();
+
+            // Send email with detailed results
+            sendResultsEmail();
+
+            // Attempt local storage flag
+             try {
+                localStorage.setItem('quizPlayed_' + userEmail.toLowerCase(), 'true');
+             } catch (e) {
+                console.warn("LocalStorage not available or failed to write.");
+             }
+        }
+
+        function startGame() {
+            userNickname = nicknameInput.value.trim();
+            userEmail = emailInput.value.trim();
+            startError.textContent = '';
+
+            if (!userNickname || !userEmail) {
+                startError.textContent = 'Please enter both your name and email.';
+                return;
+            }
+            if (!/\S+@\S+\.\S+/.test(userEmail)) {
+                 startError.textContent = 'Please enter a valid email address.';
+                 return;
+            }
+
+            // Reset answers array for new game
+            userAnswers = [];
+
+            // Replay check
+            let alreadyPlayed = false;
+            try {
+                alreadyPlayed = localStorage.getItem('quizPlayed_' + userEmail.toLowerCase()) === 'true';
+            } catch (e) {
+                 console.warn("LocalStorage not available or failed to read.");
+            }
+            if (alreadyPlayed) {
+                 startError.textContent = 'It looks like this email has already completed the quiz.';
+                 return;
+            }
+
+            // Switch screens and reset state
+            startScreen.classList.add('hidden');
+            quizScreen.classList.remove('hidden');
+            currentQuestionIndex = 0;
+            score = 0;
+            secondsElapsed = 0;
+            currentScoreEl.textContent = score;
+            timerEl.textContent = `Time: 0s`;
+
+            // Start quiz
+            startTimer();
+            showQuestion(currentQuestionIndex);
+        }
+
+        // --- Event Listeners ---
+        startButton.addEventListener('click', startGame);
+        modalCloseButton.addEventListener('click', hideFeedbackModal);
+
+    </script>
+</body>
+</html>
