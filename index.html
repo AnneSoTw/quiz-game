@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Quiz Challenge</title>
+    <title>我們的問答挑戰 / Our Quiz Challenge</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Merriweather:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
-        /* --- Wedding Theme Styles --- */
+        /* --- Bilingual Wedding Theme Styles --- */
         body {
-            font-family: 'Merriweather', serif;
+            font-family: 'Merriweather', 'Noto Sans TC', serif;
             background: linear-gradient(to bottom, #f5f0e8, #e6dacb);
             display: flex;
             justify-content: center;
@@ -33,11 +33,22 @@
             border: 1px solid #d7ccc8;
         }
         .romantic-font {
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Dancing Script', 'Noto Sans TC', cursive;
             color: #8d6e63;
         }
+        /* Bilingual text styling */
+        .lang-zh {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.15rem;
+             font-family: 'Noto Sans TC', sans-serif;
+        }
+        .lang-en {
+            display: block;
+            font-size: 0.9em;
+        }
         .game-button {
-            font-family: 'Merriweather', serif;
+            font-family: 'Merriweather', 'Noto Sans TC', serif;
             font-weight: bold;
             background-image: linear-gradient(to right, #d4af37, #c09b2d);
             color: white;
@@ -51,7 +62,11 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-top: 1.5rem;
             display: inline-block;
+            line-height: 1.4;
         }
+        .game-button .lang-zh { margin-bottom: 0.1rem; color: white; }
+        .game-button .lang-en { font-size: 0.8em; color: white; }
+
         .game-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
@@ -72,196 +87,271 @@
             border: 1px solid #e0e0e0;
             transition: all 0.2s ease;
             text-align: left;
-            font-size: 0.95rem;
-            font-family: 'Merriweather', serif;
+            font-family: 'Merriweather', 'Noto Sans TC', serif;
+            line-height: 1.4;
         }
+         .option-button .lang-zh { color: inherit; }
+         .option-button .lang-en { font-size: 0.9em; color: inherit; }
+
         .option-button:hover {
             border-color: #d4af37;
             background-color: #ffffff;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         .modal {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
+            position: fixed; left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(93, 64, 55, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 1000; opacity: 0; visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        .modal.show {
-            opacity: 1;
-            visibility: visible;
-        }
+        .modal.show { opacity: 1; visibility: visible; }
         .modal-content {
-            background-color: #fffdf9;
-            padding: 2.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            text-align: center;
-            max-width: 90%;
-            width: 450px;
-            border: 1px solid #e0e0e0;
+            background-color: #fffdf9; padding: 2.5rem; border-radius: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); text-align: center;
+            max-width: 90%; width: 450px; border: 1px solid #e0e0e0;
         }
         .modal-message {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            color: #5d4037;
+            margin-bottom: 1.5rem; font-size: 1.1rem; color: #5d4037;
+            line-height: 1.5;
         }
+         .modal-message .lang-zh { color: inherit; }
+         .modal-message .lang-en { color: inherit; }
+
         .modal-button {
-             font-family: 'Merriweather', serif;
-             font-weight: bold;
+             font-family: 'Merriweather', 'Noto Sans TC', serif; font-weight: bold;
              background-color: #a5d6a7;
-             color: #388e3c;
-             padding: 0.6rem 1.2rem;
-             border: none;
-             border-radius: 2rem;
-             cursor: pointer;
-             transition: background-color 0.3s ease;
-             font-size: 0.8rem;
-             text-transform: uppercase;
+             color: white;
+             padding: 0.6rem 1.2rem; border: none; border-radius: 2rem;
+             cursor: pointer; transition: background-color 0.3s ease;
+             font-size: 0.8rem; text-transform: uppercase; line-height: 1.4;
         }
-         .modal-button:hover {
-             background-color: #81c784;
-         }
+         .modal-button .lang-zh { color: white; }
+         .modal-button .lang-en { font-size: 0.8em; color: white; }
+         .modal-button:hover { background-color: #81c784; }
+
          /* Award Certificate */
          .award-certificate {
-            border: 8px double #c09b2d;
-            padding: 2rem;
-            margin-top: 2.5rem;
-            background-color: #fffaf0;
-            border-radius: 0.5rem;
-            position: relative; /* Keep relative for potential future absolute elements inside */
-            text-align: center; /* Center align contents */
+            border: 8px double #c09b2d; padding: 2rem; margin-top: 2.5rem;
+            background-color: #fffaf0; border-radius: 0.5rem;
+            position: relative; text-align: center;
          }
          .award-title {
-            font-family: 'Dancing Script', cursive;
-            color: #a1887f;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
+            font-family: 'Dancing Script', 'Noto Sans TC', cursive;
+            color: #a1887f; font-size: 2rem; margin-bottom: 1.5rem;
+            line-height: 1.3;
          }
          .award-text {
-            color: #795548;
-            font-size: 1rem;
-            line-height: 1.7;
-            margin-bottom: 1.5rem; /* Add space below text */
+            color: #795548; font-size: 1rem; line-height: 1.7;
+            margin-bottom: 1.5rem;
          }
-         .award-seal {
-            /* Removed position: absolute */
-            display: inline-flex; /* Use inline-flex to center content */
-            justify-content: center;
-            align-items: center;
-            width: 60px;
-            height: 60px;
-            background-color: #e57373;
-            border-radius: 50%;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-            font-family: sans-serif;
-            margin-top: 1rem; /* Add space above the seal */
+         .award-text .lang-zh, .award-text .lang-en { color: inherit; }
+         /* Style for score/time within certificate text */
+         .award-text strong {
+             font-weight: bold; /* Keep bold */
+             color: #8d6e63; /* Use muted brown like score/time header */
+             /* No extra margin/padding needed */
          }
-         .award-seal::before {
-            content: '♥';
+
+
+         /* Logo Styling */
+         .award-logo {
+            display: block; width: 80px; height: 80px;
+            margin: 1.5rem auto 1rem auto; border-radius: 0.25rem;
+            object-fit: contain;
          }
-         /* Style for the new text below the seal */
          .save-the-date-text {
-            margin-top: 0.75rem; /* Space below seal */
-            font-size: 0.9rem;
-            color: #a1887f; /* Muted brown */
-            font-weight: bold;
+            margin-top: 0.75rem; font-size: 0.9rem; color: #a1887f;
+            font-weight: bold; line-height: 1.4;
          }
-         /* Style for email status message */
+          .save-the-date-text .lang-zh, .save-the-date-text .lang-en { color: inherit; }
+
+         /* Social Share Section */
+         .social-share-section {
+             margin-top: 2rem;
+         }
+         .social-share-text {
+             font-size: 0.9rem;
+             color: #a1887f;
+             font-weight: bold;
+             margin-bottom: 0.75rem;
+             line-height: 1.4;
+         }
+         .social-share-text .lang-zh, .social-share-text .lang-en { color: inherit; }
+
+         .social-icon-link {
+             display: inline-block;
+             /* Removed color - SVG defines its own */
+             transition: opacity 0.3s ease; /* Change hover effect */
+         }
+         .social-icon-link:hover {
+             opacity: 0.8; /* Slight fade on hover */
+         }
+         .social-icon-link svg {
+             width: 36px; /* Slightly larger icon */
+             height: 36px;
+             /* Removed fill - SVG defines its own */
+         }
+
+         /* Email Status */
         #email-status {
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            font-weight: bold;
+            margin-top: 1.5rem; margin-bottom: 1rem; font-size: 0.9rem;
+            font-weight: bold; line-height: 1.4;
         }
+         #email-status .lang-zh, #email-status .lang-en { color: inherit; }
         .email-success { color: #388e3c; }
         .email-error { color: #c62828; }
         .email-sending { color: #6d4c41; }
-        /* Input field styling */
+        /* Input fields */
         input[type="text"], input[type="email"] {
-            font-family: 'Merriweather', serif;
-            border: 1px solid #d7ccc8;
-            border-radius: 0.5rem;
+            font-family: 'Merriweather', 'Noto Sans TC', serif;
+            border: 1px solid #d7ccc8; border-radius: 0.5rem;
         }
         input[type="text"]:focus, input[type="email"]:focus {
-             border-color: #d4af37;
-             box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+             border-color: #d4af37; box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
              outline: none;
         }
-        /* Score/Timer Text */
-        .score-time-text {
-            font-family: 'Merriweather', serif;
-            font-weight: bold;
-            color: #8d6e63;
+        /* Score/Timer Text in Quiz Header */
+        .score-time-header {
+            font-family: 'Merriweather', 'Noto Sans TC', serif;
+            font-weight: bold; color: #8d6e63;
+            display: flex;
+            /* Removed flex-direction: column */
+            align-items: baseline; /* Align text baselines */
+            gap: 0.75rem; /* Add space between score and time */
         }
-        .question-info-text {
-             color: #a1887f;
+        .score-time-header > span { /* Target direct children spans (score, time) */
+             display: inline-block; /* Allow them on same line */
+             line-height: 1.3;
         }
+        .question-info-text { color: #a1887f; }
+        /* Helper class to hide elements */
+        .hidden { display: none; }
 
     </style>
 </head>
 <body>
     <div class="game-container">
 
-        <div id="start-screen">
-            <h1 class="text-4xl font-bold mb-6 romantic-font">Wedding Quiz!</h1>
-            <p class="mb-5 text-gray-600">Please enter your details:</p>
-            <input type="text" id="nickname" placeholder="Your Name" class="w-full p-3 border rounded-lg mb-3 focus:outline-none" required>
-            <input type="email" id="email" placeholder="Your Email" class="w-full p-3 border rounded-lg mb-4 focus:outline-none" required>
-            <button id="start-button" class="game-button">Start Quiz</button>
+        <div id="welcome-screen">
+             <h1 class="text-4xl font-bold mb-6 romantic-font">
+                <span class="lang-zh">歡迎參加問答挑戰！</span>
+                <span class="lang-en">Welcome to the Quiz Challenge!</span>
+            </h1>
+            <p class="mb-5 text-gray-600" style="line-height: 1.6;">
+                <span class="lang-zh">遊戲規則：<br>1. 輸入您的姓名和電子郵件。<br>2. 回答關於我們的問題！<br>3. 完成後查看您的分數和時間。<br>4. 結果將自動發送給我們。</span>
+                <span class="lang-en">How to play:<br>1. Enter your name and email.<br>2. Answer questions about us!<br>3. See your score and time at the end.<br>4. Results will be sent automatically.</span>
+            </p>
+            <button id="continue-button" class="game-button">
+                <span class="lang-zh">繼續</span>
+                <span class="lang-en">Continue</span>
+            </button>
+        </div>
+
+        <div id="start-screen" class="hidden">
+            <h1 class="text-4xl font-bold mb-6 romantic-font">
+                 <span class="lang-zh">輸入您的資料</span>
+                 <span class="lang-en">Enter Your Details</span>
+            </h1>
+            <p class="mb-5 text-gray-600">
+                <span class="lang-zh">請輸入您的姓名和電子郵件以開始：</span>
+                <span class="lang-en">Please enter your name and email to start:</span>
+            </p>
+            <input type="text" id="nickname" placeholder="Your Name / 您的姓名" class="w-full p-3 border rounded-lg mb-3 focus:outline-none" required>
+            <input type="email" id="email" placeholder="Your Email / 您的電子郵件" class="w-full p-3 border rounded-lg mb-4 focus:outline-none" required>
+            <button id="start-button" class="game-button">
+                <span class="lang-zh">開始測驗</span>
+                <span class="lang-en">Start Quiz</span>
+            </button>
             <p id="start-error" class="text-red-600 mt-3 text-sm"></p>
         </div>
 
         <div id="quiz-screen" class="hidden">
-            <div class="flex justify-between items-center mb-4 text-sm question-info-text">
-                 <div>Question <span id="question-number">1</span> of <span id="total-questions"></span></div>
-                 <div class="score-time-text">Score: <span id="current-score">0</span></div>
+            <div class="flex justify-between items-start mb-4 text-sm">
+                 <div class="question-info-text">
+                    <span class="lang-zh">問題</span>
+                    <span class="lang-en">Question</span>
+                    <span id="question-number">1</span> / <span id="total-questions"></span>
+                 </div>
+                 <div class="score-time-header">
+                     <span id="current-score-display">
+                         <span class="lang-zh">分數:</span>
+                         <span class="lang-en">Score:</span>
+                         <span id="current-score">0</span>
+                     </span>
+                     <span id="timer">
+                         <span class="lang-zh">時間:</span>
+                         <span class="lang-en">Time:</span>
+                         0s
+                     </span>
+                 </div>
             </div>
-            <div id="timer" class="text-right text-lg font-semibold mb-5 score-time-text">Time: 0s</div>
-            <h2 id="question-text" class="text-xl font-semibold mb-6 text-gray-800">Question text goes here...</h2>
-            <div id="options-container">
-                </div>
+            <h2 id="question-text" class="text-xl font-semibold mb-6 text-gray-800" style="line-height: 1.5;">
+                <span class="lang-zh" id="question-text-zh">中文問題文字...</span>
+                <span class="lang-en" id="question-text-en">English question text...</span>
+            </h2>
+            <div id="options-container"></div>
         </div>
 
         <div id="results-screen" class="hidden">
-             <h1 class="text-4xl font-bold mb-5 romantic-font">Quiz Complete!</h1>
-            <p class="text-lg mb-2 text-gray-700">Congratulations, <span id="result-nickname" class="font-semibold"></span>!</p>
-            <p class="text-lg mb-2 text-gray-700">Your Score: <span id="final-score" class="score-time-text">0</span> / <span id="total-score" class="score-time-text"></span></p>
-            <p class="text-lg mb-4 text-gray-700">Time Taken: <span id="final-time" class="score-time-text">0</span> seconds</p>
+             <h1 class="text-4xl font-bold mb-5 romantic-font">
+                 <span class="lang-zh">測驗完成！</span>
+                 <span class="lang-en">Quiz Complete!</span>
+             </h1>
 
             <div id="email-status"></div>
 
             <div class="award-certificate">
-                 <div class="award-title">Certificate of Fun!</div>
-                 <div class="award-text">
-                     This certificate is happily presented to
-                     <br><strong id="award-nickname" class="text-lg"></strong><br>
-                     for celebrating with us and completing the Wedding Quiz on
-                     <span id="completion-date"></span>
-                     with a score of <strong id="award-score" class="score-time-text"></strong> and a time of <strong id="award-time" class="score-time-text"></strong> seconds.
+                 <div class="award-title">
+                     <span class="lang-zh">趣味證書</span>
+                     <span class="lang-en">Certificate of Fun!</span>
                  </div>
-                 <div class="award-seal"></div>
-                 <p class="save-the-date-text">MAS - Save the date 2222/02/02</p>
+                 <div class="award-text">
+                     <span class="lang-zh">謹將此證書頒發給<br><strong id="award-nickname-zh" class="text-lg"></strong><br>感謝您與我們一同慶祝並完成婚禮問答<br>日期：<span id="completion-date-zh"></span><br>分數：<strong id="award-score-zh"></strong>，時間：<strong id="award-time-zh"></strong> 秒</span>
+                     <span class="lang-en">This certificate is happily presented to<br><strong id="award-nickname-en" class="text-lg"></strong><br>for celebrating with us and completing the Wedding Quiz on <span id="completion-date-en"></span><br>with a score of <strong id="award-score-en"></strong> and a time of <strong id="award-time-en"></strong> seconds.</span>
+                 </div>
+                 <img src="https://placehold.co/80x80/e57373/ffffff?text=LOGO" alt="Logo" class="award-logo" id="award-logo" onerror="this.style.display='none'">
+                 <p class="save-the-date-text">
+                    <span class="lang-zh">MAS - 敬請期待 2222/02/02</span>
+                    <span class="lang-en">MAS - Save the date 2222/02/02</span>
+                 </p>
             </div>
+
+            <div class="social-share-section">
+                <p class="social-share-text">
+                    <span class="lang-zh" id="share-text-zh">在社交媒體上分享</span>
+                    <span class="lang-en" id="share-text-en">Share on social media</span>
+                </p>
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="Share on Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32px" height="32px">
+                        <defs>
+                            <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#FFD600;stop-opacity:1" />
+                                <stop offset="25%" style="stop-color:#FF7A00;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#D300C5;stop-opacity:1" />
+                                <stop offset="75%" style="stop-color:#7638FA;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#448AFF;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#ig-grad)" d="M 16 4 C 11.81 4 11.44 4.01 10.15 4.07 C 6.37 4.25 4.25 6.37 4.07 10.15 C 4.01 11.44 4 11.81 4 16 C 4 20.19 4.01 20.56 4.07 21.85 C 4.25 25.63 6.37 27.75 10.15 27.93 C 11.44 27.99 11.81 28 16 28 C 20.19 28 20.56 27.99 21.85 27.93 C 25.63 27.75 27.75 25.63 27.93 21.85 C 27.99 20.56 28 20.19 28 16 C 28 11.81 27.99 11.44 27.93 10.15 C 27.75 6.37 25.63 4.25 21.85 4.07 C 20.56 4.01 20.19 4 16 4 Z M 16 6 C 20.06 6 20.4 6.01 21.6 6.07 C 24.51 6.21 25.79 7.49 25.93 10.4 C 25.99 11.6 26 11.94 26 16 C 26 20.06 25.99 20.4 25.93 21.6 C 25.79 24.51 24.51 25.79 21.6 25.93 C 20.4 25.99 20.06 26 16 26 C 11.94 26 11.6 25.99 10.4 25.93 C 7.49 25.79 6.21 24.51 6.07 21.6 C 6.01 20.4 6 20.06 6 16 C 6 11.94 6.01 11.6 6.07 10.4 C 6.21 7.49 7.49 6.21 10.4 6.07 C 11.6 6.01 11.94 6 16 6 Z M 16 10 C 12.69 10 10 12.69 10 16 C 10 19.31 12.69 22 16 22 C 19.31 22 22 19.31 22 16 C 22 12.69 19.31 10 16 10 Z M 16 12 C 18.21 12 20 13.79 20 16 C 20 18.21 18.21 20 16 20 C 13.79 20 12 18.21 12 16 C 12 13.79 13.79 12 16 12 Z M 21.5 7.5 A 1.5 1.5 0 0 0 20 9 A 1.5 1.5 0 0 0 21.5 10.5 A 1.5 1.5 0 0 0 23 9 A 1.5 1.5 0 0 0 21.5 7.5 Z"/>
+                    </svg>
+                </a>
+            </div>
+
          </div>
 
     </div>
 
     <div id="feedback-modal" class="modal">
         <div class="modal-content">
-            <p id="modal-message" class="modal-message">Feedback message here.</p>
-            <button id="modal-close-button" class="modal-button">Next Question</button>
+            <p id="modal-message" class="modal-message">
+                 <span class="lang-zh" id="modal-message-zh">中文回饋訊息...</span>
+                 <span class="lang-en" id="modal-message-en">English feedback message...</span>
+            </p>
+            <button id="modal-close-button" class="modal-button">
+                 <span class="lang-zh">下一題</span>
+                 <span class="lang-en">Next Question</span>
+            </button>
         </div>
     </div>
 
@@ -271,58 +361,242 @@
         const EMAILJS_TEMPLATE_ID = 'template_q69067c';
         const EMAILJS_PUBLIC_KEY = 'cDxOmMxePGWSWrLPG';
 
-        // --- Questions Data ---
+        // --- Bilingual Text Content ---
+        const TEXT_CONTENT = {
+            emailSending: { zh: "正在發送結果...", en: "Sending results..." },
+            emailSuccess: { zh: "結果發送成功！", en: "Results sent successfully!" },
+            emailErrorConfig: { zh: "無法發送結果。請檢查配置。", en: "Failed to send results. Please check configuration." },
+            emailErrorTemplate: { zh: "無法發送結果。請檢查 EmailJS 模板參數。", en: "Failed to send results. Check EmailJS template parameters." },
+            emailErrorGeneric: { zh: "無法發送結果。請稍後再試。", en: "Failed to send results. Please try again later." },
+            emailNotConfigured: { zh: "電子郵件發送未配置。", en: "Email sending not configured." },
+            correctFeedback: { zh: "答對了！做得好！", en: "Correct! Good job!" },
+            incorrectFallback: { zh: "差一點，再試試！", en: "Not quite, but keep trying!" },
+            errorEnterDetails: { zh: "請輸入您的姓名和電子郵件。", en: "Please enter both your name and email." },
+            errorInvalidEmail: { zh: "請輸入有效的電子郵件地址。", en: "Please enter a valid email address." },
+            errorAlreadyPlayed: { zh: "此電子郵件似乎已完成測驗。", en: "It looks like this email has already completed the quiz." },
+            shareText: { zh: "在社交媒體上分享", en: "Share on social media" }
+        };
+
+
+        // --- Questions Data (Bilingual) ---
         const questions = [
              // Keep your questions here...
-             { question: "What is the capital of France?", options: ["Berlin", "Madrid", "Paris", "Rome"], correctAnswerIndex: 2, incorrectFeedback: ["Berlin is the capital of Germany.", "Madrid is the capital of Spain.", "Rome is the capital of Italy."] },
-             { question: "Which planet is known as the Red Planet?", options: ["Earth", "Mars", "Jupiter", "Saturn"], correctAnswerIndex: 1, incorrectFeedback: ["Earth is our home planet, mostly blue and green!", "Jupiter is the largest planet, a gas giant.", "Saturn is famous for its rings."] },
-             { question: "What is the largest mammal?", options: ["Elephant", "Blue Whale", "Giraffe", "Great White Shark"], correctAnswerIndex: 1, incorrectFeedback: ["Elephants are the largest land mammals.", "Giraffes are the tallest mammals.", "Great White Sharks are fish, not mammals."] },
-             { question: "What is 2 + 2?", options: ["3", "4", "5", "6"], correctAnswerIndex: 1, incorrectFeedback: ["Think a bit harder!", "Are you sure?", "That's too high!"] },
-             { question: "What is the square root of 144?", options: ["10", "11", "12", "13"], correctAnswerIndex: 2, incorrectFeedback: ["10 * 10 is 100.", "11 * 11 is 121.", "13 * 13 is 169."] },
-             { question: "In which year did World War II end?", options: ["1943", "1944", "1945", "1946"], correctAnswerIndex: 2, incorrectFeedback: ["The war was still ongoing.", "Very close, but not quite.", "The war had already ended by then."] },
-             { question: "What element does 'O' represent on the periodic table?", options: ["Gold", "Oxygen", "Osmium", "Olive"], correctAnswerIndex: 1, incorrectFeedback: ["Gold is Au.", "Osmium is Os.", "Olive is a fruit, not an element!"] },
-             { question: "Who painted the Mona Lisa?", options: ["Michelangelo", "Raphael", "Leonardo da Vinci", "Donatello"], correctAnswerIndex: 2, incorrectFeedback: ["Michelangelo is famous for the Sistine Chapel ceiling.", "Raphael painted 'The School of Athens'.", "Donatello was primarily a sculptor."] },
-             { question: "What is the longest river in the world?", options: ["Amazon River", "Nile River", "Mississippi River", "Yangtze River"], correctAnswerIndex: 1, incorrectFeedback: ["The Amazon is a strong contender, but traditionally the Nile is considered longer.", "The Mississippi is the longest in North America.", "The Yangtze is the longest in Asia."] },
-             { question: "What is the currency of Japan?", options: ["Won", "Yuan", "Yen", "Dollar"], correctAnswerIndex: 2, incorrectFeedback: ["Won is the currency of South Korea.", "Yuan is the currency of China.", "Dollar is used in many countries, but not Japan's primary currency."] },
-             { question: "How many continents are there?", options: ["5", "6", "7", "8"], correctAnswerIndex: 2, incorrectFeedback: ["There are more than that!", "Almost, just one more!", "That's one too many!"] },
-             { question: "What is the boiling point of water in Celsius?", options: ["90°C", "100°C", "110°C", "0°C"], correctAnswerIndex: 1, incorrectFeedback: ["It needs to be a bit hotter.", "That's too hot!", "That's the freezing point!"] },
-             { question: "Which country is known as the Land of the Rising Sun?", options: ["China", "South Korea", "Japan", "Thailand"], correctAnswerIndex: 2, incorrectFeedback: ["China has a different nickname.", "South Korea is nearby, but not the one.", "Thailand is known as the Land of Smiles."] },
-             { question: "What is the main ingredient in guacamole?", options: ["Tomato", "Onion", "Avocado", "Lime"], correctAnswerIndex: 2, incorrectFeedback: ["Tomatoes are often included, but not the main star.", "Onions add flavor, but aren't the base.", "Lime juice is used for tang, not the bulk."] },
-             { question: "Who wrote 'Hamlet'?", options: ["Charles Dickens", "William Shakespeare", "Jane Austen", "Leo Tolstoy"], correctAnswerIndex: 1, incorrectFeedback: ["Dickens wrote novels like 'Oliver Twist'.", "Austen wrote 'Pride and Prejudice'.", "Tolstoy wrote 'War and Peace'."] },
-             { question: "What is the hardest natural substance on Earth?", options: ["Gold", "Iron", "Diamond", "Quartz"], correctAnswerIndex: 2, incorrectFeedback: ["Gold is relatively soft.", "Iron is strong, but not the hardest.", "Quartz is hard, but diamond is harder."] },
-             { question: "How many sides does a hexagon have?", options: ["5", "6", "7", "8"], correctAnswerIndex: 1, incorrectFeedback: ["That's a pentagon.", "That's a heptagon.", "That's an octagon."] },
-             { question: "What is the capital of Australia?", options: ["Sydney", "Melbourne", "Canberra", "Brisbane"], correctAnswerIndex: 2, incorrectFeedback: ["Sydney is the largest city, but not the capital.", "Melbourne is another major city, known for culture.", "Brisbane is the capital of Queensland."] },
-             { question: "Which gas do plants absorb from the atmosphere?", options: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"], correctAnswerIndex: 2, incorrectFeedback: ["Plants release oxygen during photosynthesis.", "Nitrogen is abundant but absorbed differently (often via soil).", "Hydrogen is the lightest element."] },
-             { question: "Final Question: Ready for the wedding?", options: ["Yes!", "Absolutely!", "Can't wait!", "Let's celebrate!"], correctAnswerIndex: 0, incorrectFeedback: ["Wonderful!", "Great!", "Fantastic!"] }
+             {
+                 question_zh: "法國的首都是什麼？",
+                 question_en: "What is the capital of France?",
+                 options_zh: ["柏林", "馬德里", "巴黎", "羅馬"],
+                 options_en: ["Berlin", "Madrid", "Paris", "Rome"],
+                 correctAnswerIndex: 2,
+                 incorrectFeedback_zh: ["柏林是德國的首都。", "馬德里是西班牙的首都。", "羅馬是義大利的首都。"],
+                 incorrectFeedback_en: ["Berlin is the capital of Germany.", "Madrid is the capital of Spain.", "Rome is the capital of Italy."]
+             },
+             {
+                 question_zh: "哪個行星被稱為紅色行星？",
+                 question_en: "Which planet is known as the Red Planet?",
+                 options_zh: ["地球", "火星", "木星", "土星"],
+                 options_en: ["Earth", "Mars", "Jupiter", "Saturn"],
+                 correctAnswerIndex: 1,
+                 incorrectFeedback_zh: ["地球是我們的家園，大部分是藍色和綠色！", "木星是最大的行星，一個氣態巨行星。", "土星以其環而聞名。"],
+                 incorrectFeedback_en: ["Earth is our home planet, mostly blue and green!", "Jupiter is the largest planet, a gas giant.", "Saturn is famous for its rings."]
+             },
+             {
+                question_zh: "世界上最大的哺乳動物是什麼？",
+                question_en: "What is the largest mammal?",
+                options_zh: ["大象", "藍鯨", "長頸鹿", "大白鯊"],
+                options_en: ["Elephant", "Blue Whale", "Giraffe", "Great White Shark"],
+                correctAnswerIndex: 1,
+                incorrectFeedback_zh: ["大象是最大的陸地哺乳動物。", "長頸鹿是最高的哺乳動物。", "大白鯊是魚類，不是哺乳動物。"],
+                incorrectFeedback_en: ["Elephants are the largest land mammals.", "Giraffes are the tallest mammals.", "Great White Sharks are fish, not mammals."]
+             },
+             {
+                 question_zh: "2 + 2 等於多少？",
+                 question_en: "What is 2 + 2?",
+                 options_zh: ["3", "4", "5", "6"],
+                 options_en: ["3", "4", "5", "6"],
+                 correctAnswerIndex: 1,
+                 incorrectFeedback_zh: ["再想一想！", "你確定嗎？", "太高了！"],
+                 incorrectFeedback_en: ["Think a bit harder!", "Are you sure?", "That's too high!"]
+             },
+             {
+                 question_zh: "144 的平方根是多少？",
+                 question_en: "What is the square root of 144?",
+                 options_zh: ["10", "11", "12", "13"],
+                 options_en: ["10", "11", "12", "13"],
+                 correctAnswerIndex: 2,
+                 incorrectFeedback_zh: ["10 * 10 是 100。", "11 * 11 是 121。", "13 * 13 是 169。"],
+                 incorrectFeedback_en: ["10 * 10 is 100.", "11 * 11 is 121.", "13 * 13 is 169."]
+             },
+             {
+                 question_zh: "第二次世界大戰在哪一年結束？",
+                 question_en: "In which year did World War II end?",
+                 options_zh: ["1943", "1944", "1945", "1946"],
+                 options_en: ["1943", "1944", "1945", "1946"],
+                 correctAnswerIndex: 2,
+                 incorrectFeedback_zh: ["戰爭仍在進行中。", "非常接近，但還差一點。", "那時戰爭已經結束了。"],
+                 incorrectFeedback_en: ["The war was still ongoing.", "Very close, but not quite.", "The war had already ended by then."]
+             },
+             {
+                 question_zh: "元素週期表上的 'O' 代表什麼元素？",
+                 question_en: "What element does 'O' represent on the periodic table?",
+                 options_zh: ["金", "氧", "鋨", "橄欖"],
+                 options_en: ["Gold", "Oxygen", "Osmium", "Olive"],
+                 correctAnswerIndex: 1,
+                 incorrectFeedback_zh: ["金是 Au。", "鋨是 Os。", "橄欖是一種水果，不是元素！"],
+                 incorrectFeedback_en: ["Gold is Au.", "Osmium is Os.", "Olive is a fruit, not an element!"]
+             },
+             {
+                 question_zh: "誰畫了《蒙娜麗莎》？",
+                 question_en: "Who painted the Mona Lisa?",
+                 options_zh: ["米開朗基羅", "拉斐爾", "李奧納多·達文西", "多那太羅"],
+                 options_en: ["Michelangelo", "Raphael", "Leonardo da Vinci", "Donatello"],
+                 correctAnswerIndex: 2,
+                 incorrectFeedback_zh: ["米開朗基羅以西斯汀教堂天頂畫聞名。", "拉斐爾畫了《雅典學院》。", "多那太羅主要是一位雕塑家。"],
+                 incorrectFeedback_en: ["Michelangelo is famous for the Sistine Chapel ceiling.", "Raphael painted 'The School of Athens'.", "Donatello was primarily a sculptor."]
+             },
+             {
+                 question_zh: "世界上最長的河流是哪一條？",
+                 question_en: "What is the longest river in the world?",
+                 options_zh: ["亞馬遜河", "尼羅河", "密西西比河", "長江"],
+                 options_en: ["Amazon River", "Nile River", "Mississippi River", "Yangtze River"],
+                 correctAnswerIndex: 1,
+                 incorrectFeedback_zh: ["亞馬遜河是一個有力的競爭者，但傳統上認為尼羅河更長。", "密西西比河是北美最長的河流。", "長江是亞洲最長的河流。"],
+                 incorrectFeedback_en: ["The Amazon is a strong contender, but traditionally the Nile is considered longer.", "The Mississippi is the longest in North America.", "The Yangtze is the longest in Asia."]
+             },
+             {
+                 question_zh: "日本的貨幣是什麼？",
+                 question_en: "What is the currency of Japan?",
+                 options_zh: ["韓元", "人民幣", "日圓", "美元"],
+                 options_en: ["Won", "Yuan", "Yen", "Dollar"],
+                 correctAnswerIndex: 2,
+                 incorrectFeedback_zh: ["韓元是韓國的貨幣。", "人民幣是中國的貨幣。", "美元在許多國家使用，但不是日本的主要貨幣。"],
+                 incorrectFeedback_en: ["Won is the currency of South Korea.", "Yuan is the currency of China.", "Dollar is used in many countries, but not Japan's primary currency."]
+             },
+             {
+                 question_zh: "地球上有多少個大洲？",
+                 question_en: "How many continents are there?",
+                 options_zh: ["5", "6", "7", "8"],
+                 options_en: ["5", "6", "7", "8"],
+                 correctAnswerIndex: 2,
+                 incorrectFeedback_zh: ["不止這些！", "差不多了，再多一個！", "太多了！"],
+                 incorrectFeedback_en: ["There are more than that!", "Almost, just one more!", "That's one too many!"]
+             },
+             {
+                 question_zh: "水的沸點是多少攝氏度？",
+                 question_en: "What is the boiling point of water in Celsius?",
+                 options_zh: ["90°C", "100°C", "110°C", "0°C"],
+                 options_en: ["90°C", "100°C", "110°C", "0°C"],
+                 correctAnswerIndex: 1,
+                 incorrectFeedback_zh: ["需要再熱一點。", "太熱了！", "那是冰點！"],
+                 incorrectFeedback_en: ["It needs to be a bit hotter.", "That's too hot!", "That's the freezing point!"]
+             },
+             {
+                 question_zh: "哪個國家被稱為「日出之國」？",
+                 question_en: "Which country is known as the Land of the Rising Sun?",
+                 options_zh: ["中國", "韓國", "日本", "泰國"],
+                 options_en: ["China", "South Korea", "Japan", "Thailand"],
+                 correctAnswerIndex: 2,
+                 incorrectFeedback_zh: ["中國有不同的綽號。", "韓國在附近，但不是那個。", "泰國被稱為「微笑之國」。"],
+                 incorrectFeedback_en: ["China has a different nickname.", "South Korea is nearby, but not the one.", "Thailand is known as the Land of Smiles."]
+             },
+             {
+                 question_zh: "酪梨醬的主要成分是什麼？",
+                 question_en: "What is the main ingredient in guacamole?",
+                 options_zh: ["番茄", "洋蔥", "酪梨", "萊姆"],
+                 options_en: ["Tomato", "Onion", "Avocado", "Lime"],
+                 correctAnswerIndex: 2,
+                 incorrectFeedback_zh: ["番茄通常會加，但不是主角。", "洋蔥增加風味，但不是基底。", "萊姆汁用於提味，不是主體。"],
+                 incorrectFeedback_en: ["Tomatoes are often included, but not the main star.", "Onions add flavor, but aren't the base.", "Lime juice is used for tang, not the bulk."]
+             },
+             {
+                 question_zh: "誰寫了《哈姆雷特》？",
+                 question_en: "Who wrote 'Hamlet'?",
+                 options_zh: ["查爾斯·狄更斯", "威廉·莎士比亞", "珍·奧斯汀", "列夫·托爾斯泰"],
+                 options_en: ["Charles Dickens", "William Shakespeare", "Jane Austen", "Leo Tolstoy"],
+                 correctAnswerIndex: 1,
+                 incorrectFeedback_zh: ["狄更斯寫了像《孤雛淚》這樣的小說。", "奧斯汀寫了《傲慢與偏見》。", "托爾斯泰寫了《戰爭與和平》。"],
+                 incorrectFeedback_en: ["Dickens wrote novels like 'Oliver Twist'.", "Austen wrote 'Pride and Prejudice'.", "Tolstoy wrote 'War and Peace'."]
+             },
+             {
+                 question_zh: "地球上最硬的天然物質是什麼？",
+                 question_en: "What is the hardest natural substance on Earth?",
+                 options_zh: ["黃金", "鐵", "鑽石", "石英"],
+                 options_en: ["Gold", "Iron", "Diamond", "Quartz"],
+                 correctAnswerIndex: 2,
+                 incorrectFeedback_zh: ["黃金相對較軟。", "鐵很堅固，但不是最硬的。", "石英很硬，但鑽石更硬。"],
+                 incorrectFeedback_en: ["Gold is relatively soft.", "Iron is strong, but not the hardest.", "Quartz is hard, but diamond is harder."]
+             },
+             {
+                 question_zh: "六邊形有幾條邊？",
+                 question_en: "How many sides does a hexagon have?",
+                 options_zh: ["5", "6", "7", "8"],
+                 options_en: ["5", "6", "7", "8"],
+                 correctAnswerIndex: 1,
+                 incorrectFeedback_zh: ["那是五邊形。", "那是七邊形。", "那是八邊形。"],
+                 incorrectFeedback_en: ["That's a pentagon.", "That's a heptagon.", "That's an octagon."]
+             },
+             {
+                 question_zh: "澳洲的首都是哪裡？",
+                 question_en: "What is the capital of Australia?",
+                 options_zh: ["雪梨", "墨爾本", "坎培拉", "布里斯本"],
+                 options_en: ["Sydney", "Melbourne", "Canberra", "Brisbane"],
+                 correctAnswerIndex: 2,
+                 incorrectFeedback_zh: ["雪梨是最大的城市，但不是首都。", "墨爾本是另一個主要城市，以文化聞名。", "布里斯本是昆士蘭州的首府。"],
+                 incorrectFeedback_en: ["Sydney is the largest city, but not the capital.", "Melbourne is another major city, known for culture.", "Brisbane is the capital of Queensland."]
+             },
+             {
+                 question_zh: "植物從大氣中吸收哪種氣體？",
+                 question_en: "Which gas do plants absorb from the atmosphere?",
+                 options_zh: ["氧氣", "氮氣", "二氧化碳", "氫氣"],
+                 options_en: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+                 correctAnswerIndex: 2,
+                 incorrectFeedback_zh: ["植物在光合作用中釋放氧氣。", "氮氣很豐富，但吸收方式不同（通常透過土壤）。", "氫氣是最輕的元素。"],
+                 incorrectFeedback_en: ["Plants release oxygen during photosynthesis.", "Nitrogen is abundant but absorbed differently (often via soil).", "Hydrogen is the lightest element."]
+             },
+             {
+                 question_zh: "最後一題：準備好參加婚禮了嗎？",
+                 question_en: "Final Question: Ready for the wedding?",
+                 options_zh: ["是的！", "當然！", "等不及了！", "一起慶祝吧！"],
+                 options_en: ["Yes!", "Absolutely!", "Can't wait!", "Let's celebrate!"],
+                 correctAnswerIndex: 0,
+                 incorrectFeedback_zh: ["太棒了！", "很好！", "太好了！"],
+                 incorrectFeedback_en: ["Wonderful!", "Great!", "Fantastic!"]
+             }
         ];
 
         // --- DOM Elements ---
-        // (Get elements as before...)
+        const welcomeScreen = document.getElementById('welcome-screen');
         const startScreen = document.getElementById('start-screen');
         const quizScreen = document.getElementById('quiz-screen');
         const resultsScreen = document.getElementById('results-screen');
+        const continueButton = document.getElementById('continue-button');
         const startButton = document.getElementById('start-button');
         const nicknameInput = document.getElementById('nickname');
         const emailInput = document.getElementById('email');
         const startError = document.getElementById('start-error');
         const questionNumberEl = document.getElementById('question-number');
         const totalQuestionsEl = document.getElementById('total-questions');
+        const currentScoreDisplay = document.getElementById('current-score-display');
         const currentScoreEl = document.getElementById('current-score');
         const timerEl = document.getElementById('timer');
-        const questionTextEl = document.getElementById('question-text');
+        const questionTextZh = document.getElementById('question-text-zh');
+        const questionTextEn = document.getElementById('question-text-en');
         const optionsContainer = document.getElementById('options-container');
         const feedbackModal = document.getElementById('feedback-modal');
-        const modalMessageEl = document.getElementById('modal-message');
+        const modalMessageZh = document.getElementById('modal-message-zh');
+        const modalMessageEn = document.getElementById('modal-message-en');
         const modalCloseButton = document.getElementById('modal-close-button');
-        const resultNicknameEl = document.getElementById('result-nickname');
-        const finalScoreEl = document.getElementById('final-score');
-        const totalScoreEl = document.getElementById('total-score');
-        const finalTimeEl = document.getElementById('final-time');
-        const awardNicknameEl = document.getElementById('award-nickname');
-        const awardScoreEl = document.getElementById('award-score');
-        const awardTimeEl = document.getElementById('award-time');
-        const completionDateEl = document.getElementById('completion-date');
+        const awardNicknameZh = document.getElementById('award-nickname-zh');
+        const awardNicknameEn = document.getElementById('award-nickname-en');
+        const completionDateZh = document.getElementById('completion-date-zh');
+        const completionDateEn = document.getElementById('completion-date-en');
+        const awardScoreZh = document.getElementById('award-score-zh');
+        const awardScoreEn = document.getElementById('award-score-en');
+        const awardTimeZh = document.getElementById('award-time-zh');
+        const awardTimeEn = document.getElementById('award-time-en');
         const emailStatusEl = document.getElementById('email-status');
+        const shareTextZh = document.getElementById('share-text-zh');
+        const shareTextEn = document.getElementById('share-text-en');
+
 
         // --- Game State ---
         let currentQuestionIndex = 0;
@@ -332,15 +606,18 @@
         let userNickname = '';
         let userEmail = '';
         let quizStartTime;
-        let userAnswers = []; // <-- New array to store detailed answers
+        let userAnswers = [];
 
         // --- Functions ---
 
         function startTimer() {
             quizStartTime = Date.now();
+            secondsElapsed = 0;
+            timerEl.innerHTML = `<span class="lang-zh">時間:</span><span class="lang-en">Time:</span> ${secondsElapsed}s`;
+
             timerInterval = setInterval(() => {
                 secondsElapsed = Math.floor((Date.now() - quizStartTime) / 1000);
-                timerEl.textContent = `Time: ${secondsElapsed}s`;
+                 timerEl.innerHTML = `<span class="lang-zh">時間:</span><span class="lang-en">Time:</span> ${secondsElapsed}s`;
             }, 1000);
         }
 
@@ -356,18 +633,21 @@
 
             const question = questions[index];
             questionNumberEl.textContent = index + 1;
-            totalQuestionsEl.textContent = questions.length; // Ensure total is set
-            questionTextEl.textContent = question.question;
+            totalQuestionsEl.textContent = questions.length;
+            questionTextZh.textContent = question.question_zh;
+            questionTextEn.textContent = question.question_en;
             optionsContainer.innerHTML = '';
 
-            question.options.forEach((option, i) => {
+            question.options_en.forEach((optionEn, i) => {
+                const optionZh = question.options_zh[i];
                 const button = document.createElement('button');
-                button.textContent = option;
                 button.classList.add('option-button');
-                // Pass current question object to handleAnswer
+                button.innerHTML = `<span class="lang-zh">${optionZh}</span><span class="lang-en">${optionEn}</span>`;
                 button.onclick = () => handleAnswer(i, question);
                 optionsContainer.appendChild(button);
             });
+
+             currentScoreDisplay.innerHTML = `<span class="lang-zh">分數:</span><span class="lang-en">Score:</span> <span id="current-score">${score}</span>`;
         }
 
         function handleAnswer(selectedIndex, question) {
@@ -376,31 +656,33 @@
 
             const correctIndex = question.correctAnswerIndex;
             const isCorrect = selectedIndex === correctIndex;
-            let feedbackMsg = '';
+            let feedbackMsgZh = '';
+            let feedbackMsgEn = '';
 
             if (isCorrect) {
                 score++;
-                currentScoreEl.textContent = score;
-                feedbackMsg = "Correct! You know your stuff!";
+                currentScoreDisplay.innerHTML = `<span class="lang-zh">分數:</span><span class="lang-en">Score:</span> <span id="current-score">${score}</span>`;
+                feedbackMsgZh = TEXT_CONTENT.correctFeedback.zh;
+                feedbackMsgEn = TEXT_CONTENT.correctFeedback.en;
             } else {
                 let feedbackIndex = selectedIndex < correctIndex ? selectedIndex : selectedIndex - 1;
-                feedbackMsg = question.incorrectFeedback[feedbackIndex] || "Not quite, but keep trying!";
+                feedbackMsgZh = question.incorrectFeedback_zh[feedbackIndex] || TEXT_CONTENT.incorrectFallback.zh;
+                feedbackMsgEn = question.incorrectFeedback_en[feedbackIndex] || TEXT_CONTENT.incorrectFallback.en;
             }
 
-            // --- Store detailed answer ---
             userAnswers.push({
-                question: question.question,
-                selectedAnswer: question.options[selectedIndex],
-                correctAnswer: question.options[correctIndex],
+                question: question.question_en,
+                selectedAnswer: question.options_en[selectedIndex],
+                correctAnswer: question.options_en[correctIndex],
                 isCorrect: isCorrect
             });
-            // --- End store detailed answer ---
 
-            showFeedbackModal(feedbackMsg);
+            showFeedbackModal(feedbackMsgZh, feedbackMsgEn);
         }
 
-        function showFeedbackModal(message) {
-            modalMessageEl.textContent = message;
+        function showFeedbackModal(messageZh, messageEn) {
+            modalMessageZh.textContent = messageZh;
+            modalMessageEn.textContent = messageEn;
             feedbackModal.classList.add('show');
         }
 
@@ -411,8 +693,6 @@
         }
 
         function formatDetailedResults() {
-            // Formats the userAnswers array into a string for the email body
-            // Using \n for line breaks in plain text email. Use <br> if your template supports HTML.
             let resultsString = "Detailed Results:\n--------------------\n";
             userAnswers.forEach((answer, index) => {
                 resultsString += `Q${index + 1}: ${answer.question}\n`;
@@ -425,13 +705,21 @@
             return resultsString;
         }
 
-        function sendResultsEmail() {
-            emailStatusEl.textContent = 'Sending results...';
-            emailStatusEl.className = 'email-sending';
+         function setEmailStatus(statusKey) {
+             const status = TEXT_CONTENT[statusKey];
+             let className = 'email-sending';
+             if (statusKey === 'emailSuccess') className = 'email-success';
+             if (statusKey.startsWith('emailError') || statusKey === 'emailNotConfigured') className = 'email-error';
 
-            // --- Format detailed results for email ---
+             emailStatusEl.innerHTML = `<span class="lang-zh">${status.zh}</span><span class="lang-en">${status.en}</span>`;
+             emailStatusEl.className = className;
+         }
+
+
+        function sendResultsEmail() {
+            setEmailStatus('emailSending');
+
             const detailedResultsText = formatDetailedResults();
-            // --- End format detailed results ---
 
             const templateParams = {
                 nickname: userNickname,
@@ -439,34 +727,27 @@
                 score: score,
                 total_questions: questions.length,
                 time: secondsElapsed,
-                detailed_results: detailedResultsText // <-- Add detailed results here
+                detailed_results: detailedResultsText
             };
 
-            // Check if EmailJS IDs are placeholders
             if (!EMAILJS_SERVICE_ID || EMAILJS_SERVICE_ID === 'YOUR_SERVICE_ID' ||
                 !EMAILJS_TEMPLATE_ID || EMAILJS_TEMPLATE_ID === 'YOUR_TEMPLATE_ID' ||
                 !EMAILJS_PUBLIC_KEY || EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
-
                 console.warn("EmailJS credentials are placeholders. Skipping email send.");
-                emailStatusEl.textContent = 'Email sending not configured.';
-                emailStatusEl.className = 'email-error';
+                setEmailStatus('emailNotConfigured');
                 return;
             }
 
             emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
                 .then((response) => {
                    console.log('EmailJS SUCCESS!', response.status, response.text);
-                   emailStatusEl.textContent = 'Results sent successfully!';
-                   emailStatusEl.className = 'email-success';
+                   setEmailStatus('emailSuccess');
                 }, (error) => {
                    console.error('EmailJS FAILED...', error);
-                   // Provide more specific error feedback if possible
-                   let errorMsg = 'Failed to send results. Please check configuration.';
-                   if (error.status === 400) { // Example: Bad request often means template param mismatch
-                       errorMsg = 'Failed to send results. Check EmailJS template parameters.';
-                   }
-                   emailStatusEl.textContent = errorMsg;
-                   emailStatusEl.className = 'email-error';
+                   let errorKey = 'emailErrorGeneric';
+                   if (error.status === 400) errorKey = 'emailErrorTemplate';
+                   else if (error.status !== 0) errorKey = 'emailErrorConfig';
+                   setEmailStatus(errorKey);
                 });
         }
 
@@ -476,23 +757,26 @@
             quizScreen.classList.add('hidden');
             resultsScreen.classList.remove('hidden');
 
-            // Display final results
-            resultNicknameEl.textContent = userNickname;
-            finalScoreEl.textContent = score;
-            totalScoreEl.textContent = questions.length;
-            finalTimeEl.textContent = secondsElapsed;
-
-            // Populate certificate
-            awardNicknameEl.textContent = userNickname;
+            const today = new Date();
+            const dateZh = today.toLocaleDateString('zh-TW');
+            const dateEn = today.toLocaleDateString('en-US');
             const awardScoreText = `${score} / ${questions.length}`;
-            awardScoreEl.textContent = awardScoreText;
-            awardTimeEl.textContent = secondsElapsed;
-            completionDateEl.textContent = new Date().toLocaleDateString();
+            const awardTimeText = secondsElapsed;
 
-            // Send email with detailed results
+            awardNicknameZh.textContent = userNickname;
+            awardNicknameEn.textContent = userNickname;
+            completionDateZh.textContent = dateZh;
+            completionDateEn.textContent = dateEn;
+            awardScoreZh.textContent = awardScoreText;
+            awardScoreEn.textContent = awardScoreText;
+            awardTimeZh.textContent = awardTimeText;
+            awardTimeEn.textContent = awardTimeText;
+
+            shareTextZh.textContent = TEXT_CONTENT.shareText.zh;
+            shareTextEn.textContent = TEXT_CONTENT.shareText.en;
+
             sendResultsEmail();
 
-            // Attempt local storage flag
              try {
                 localStorage.setItem('quizPlayed_' + userEmail.toLowerCase(), 'true');
              } catch (e) {
@@ -500,24 +784,31 @@
              }
         }
 
-        function startGame() {
+        // --- Initial Setup and Transitions ---
+
+        function showStartScreen() {
+            welcomeScreen.classList.add('hidden');
+            startScreen.classList.remove('hidden');
+            quizScreen.classList.add('hidden');
+            resultsScreen.classList.add('hidden');
+        }
+
+        function startQuizFlow() {
             userNickname = nicknameInput.value.trim();
             userEmail = emailInput.value.trim();
-            startError.textContent = '';
+            startError.innerHTML = '';
 
             if (!userNickname || !userEmail) {
-                startError.textContent = 'Please enter both your name and email.';
+                startError.innerHTML = `<span class="lang-zh">${TEXT_CONTENT.errorEnterDetails.zh}</span><span class="lang-en">${TEXT_CONTENT.errorEnterDetails.en}</span>`;
                 return;
             }
             if (!/\S+@\S+\.\S+/.test(userEmail)) {
-                 startError.textContent = 'Please enter a valid email address.';
+                 startError.innerHTML = `<span class="lang-zh">${TEXT_CONTENT.errorInvalidEmail.zh}</span><span class="lang-en">${TEXT_CONTENT.errorInvalidEmail.en}</span>`;
                  return;
             }
 
-            // Reset answers array for new game
             userAnswers = [];
 
-            // Replay check
             let alreadyPlayed = false;
             try {
                 alreadyPlayed = localStorage.getItem('quizPlayed_' + userEmail.toLowerCase()) === 'true';
@@ -525,27 +816,34 @@
                  console.warn("LocalStorage not available or failed to read.");
             }
             if (alreadyPlayed) {
-                 startError.textContent = 'It looks like this email has already completed the quiz.';
+                 startError.innerHTML = `<span class="lang-zh">${TEXT_CONTENT.errorAlreadyPlayed.zh}</span><span class="lang-en">${TEXT_CONTENT.errorAlreadyPlayed.en}</span>`;
                  return;
             }
 
-            // Switch screens and reset state
             startScreen.classList.add('hidden');
             quizScreen.classList.remove('hidden');
+            resultsScreen.classList.add('hidden');
+
             currentQuestionIndex = 0;
             score = 0;
             secondsElapsed = 0;
-            currentScoreEl.textContent = score;
-            timerEl.textContent = `Time: 0s`;
+            currentScoreDisplay.innerHTML = `<span class="lang-zh">分數:</span><span class="lang-en">Score:</span> <span id="current-score">${score}</span>`;
+            timerEl.innerHTML = `<span class="lang-zh">時間:</span><span class="lang-en">Time:</span> 0s`;
 
-            // Start quiz
             startTimer();
             showQuestion(currentQuestionIndex);
         }
 
         // --- Event Listeners ---
-        startButton.addEventListener('click', startGame);
+        continueButton.addEventListener('click', showStartScreen);
+        startButton.addEventListener('click', startQuizFlow);
         modalCloseButton.addEventListener('click', hideFeedbackModal);
+
+        // --- Initial Display ---
+        welcomeScreen.classList.remove('hidden');
+        startScreen.classList.add('hidden');
+        quizScreen.classList.add('hidden');
+        resultsScreen.classList.add('hidden');
 
     </script>
 </body>
