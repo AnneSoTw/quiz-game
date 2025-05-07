@@ -8,8 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Merriweather:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
-    <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
     <style>
         /* --- Bilingual Wedding Theme Styles --- */
         body {
@@ -228,6 +229,87 @@
         /* Helper class to hide elements */
         .hidden { display: none; }
 
+        /* === Styles for the Share Canvas in quiz.html === */
+
+        .share-canvas-wrapper {
+            position: absolute;
+            left: -9999px; /* Position off-screen */
+            top: -9999px;
+            width: 540px;   /* Instagram story width */
+            height: 960px;  /* Instagram story height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #fffaf0; /* Match certificate background */
+            padding: 40px;             /* Overall padding for the canvas */
+            box-sizing: border-box;
+            overflow: hidden;          /* Hide any overflow */
+        }
+        
+        .share-canvas-wrapper .award-certificate {
+            border: 8px double #c09b2d;
+            box-shadow: none;
+            padding: 1.5rem; /* SLIGHTLY REDUCED PADDING */
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        
+        .share-canvas-wrapper .award-title {
+            font-size: 1.8rem; /* Slightly reduced */
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .share-canvas-wrapper .award-text {
+            font-size: 0.9rem; /* Slightly reduced */
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        
+        .share-canvas-wrapper .award-text strong {
+            font-size: 0.9rem; /* Match surrounding text */
+        }
+        
+        .share-canvas-wrapper .bottom-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            width: 100%;
+            margin-top: auto;
+            padding: 0 0.5rem;
+            box-sizing: border-box;
+        }
+        
+        .share-canvas-wrapper .award-logo {
+            width: 65px;
+            height: 65px;
+            margin: 0;
+            order: 2; /* Logo on the right */
+            opacity: 0.8;
+            filter: grayscale(50%);
+        }
+        
+        .share-canvas-wrapper .save-the-date-text {
+            font-size: 0.75rem; /* Slightly reduced */
+            color: #795548;
+            font-weight: normal;
+            line-height: 1.3;
+            margin: 0;
+            text-align: left;
+            order: 1; /* Text on the left */
+            flex-grow: 1;
+            padding-right: 0.5rem;
+        }
+        /* === End of Styles for the Share Canvas === */
     </style>
 </head>
 <body>
@@ -236,7 +318,7 @@
         <div id="welcome-screen">
              <h1 class="text-4xl font-bold mb-6 romantic-font">
                 <span class="lang-zh">歡迎參加問答挑戰！</span>
-                <span class="lang-en">Welcome to the Quiz Challenge!</span>
+                <span class="lang-en">Welcome to the Quiz Challenge! A</span>
             </h1>
             <p class="mb-5 text-gray-600" style="line-height: 1.6;">
                 <span class="lang-zh">遊戲規則：<br>1. 輸入您的姓名和電子郵件。<br>2. 回答關於我們的問題！<br>3. 完成後查看您的分數和時間。<br>4. 結果將自動發送給我們。</span>
@@ -322,8 +404,9 @@
                     <span class="lang-zh" id="share-text-zh">在社交媒體上分享</span>
                     <span class="lang-en" id="share-text-en">Share on social media</span>
                 </p>
-                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="Share on Instagram">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32px" height="32px">
+
+                 <a href="#" id="instagram-share-link" class="social-icon-link" aria-label="Share on Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32px" height="36px">
                         <defs>
                             <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
                                 <stop offset="0%" style="stop-color:#FFD600;stop-opacity:1" />
@@ -374,7 +457,10 @@
             errorEnterDetails: { zh: "請輸入您的姓名和電子郵件。", en: "Please enter both your name and email." },
             errorInvalidEmail: { zh: "請輸入有效的電子郵件地址。", en: "Please enter a valid email address." },
             errorAlreadyPlayed: { zh: "此電子郵件似乎已完成測驗。", en: "It looks like this email has already completed the quiz." },
-            shareText: { zh: "在社交媒體上分享", en: "Share on social media" }
+            shareText: { zh: "在社交媒體上分享", en: "Share on social media" },
+            shareUnsupported = { zh: "您的瀏覽器不支援直接分享圖片。請嘗試截圖。", en: "Direct image sharing is not supported in your browser. Please try taking a screenshot." },
+            shareFailed = { zh: "分享失敗。請稍後再試。", en: "Sharing failed. Please try again later." },
+            shareHtml2CanvasError = { zh: "無法準備分享圖片。請稍後再試。", en: "Could not prepare image for sharing. Please try again later." }
         };
 
 
@@ -783,6 +869,100 @@
                 console.warn("LocalStorage not available or failed to write.");
              }
         }
+        async function shareCertificate() {
+            console.log("Attempting to share certificate from quiz.html...");
+            const awardCertificateElement = document.querySelector('.award-certificate'); // Assuming this class targets your certificate
+        
+            if (!awardCertificateElement) {
+                console.error("Award certificate element not found in quiz.html.");
+                alert(TEXT_CONTENT.shareFailed?.zh + '\n' + TEXT_CONTENT.shareFailed?.en || 'Share failed.');
+                return;
+            }
+        
+            let tempWrapper = null;
+            try {
+                const certificateClone = awardCertificateElement.cloneNode(true);
+                tempWrapper = document.createElement('div');
+                tempWrapper.classList.add('share-canvas-wrapper');
+        
+                const clonedLogo = certificateClone.querySelector('.award-logo');
+                const clonedSaveTheDate = certificateClone.querySelector('.save-the-date-text');
+        
+                // Create the bottom section to hold logo and save the date text
+                const bottomSection = document.createElement('div');
+                bottomSection.classList.add('bottom-section');
+        
+                if (clonedSaveTheDate && clonedSaveTheDate.parentNode) {
+                    clonedSaveTheDate.parentNode.removeChild(clonedSaveTheDate);
+                    bottomSection.appendChild(clonedSaveTheDate);
+                }
+                if (clonedLogo && clonedLogo.parentNode) {
+                    // Ensure the logo in the share canvas uses the intended image
+                    // If your original logo has a dynamic src or you want a specific one for sharing:
+                    // clonedLogo.src = 'URL_TO_YOUR_LOGO_FOR_SHARE'; // Replace if needed
+                    clonedLogo.parentNode.removeChild(clonedLogo);
+                    bottomSection.appendChild(clonedLogo);
+                }
+        
+                certificateClone.appendChild(bottomSection);
+                tempWrapper.appendChild(certificateClone);
+                document.body.appendChild(tempWrapper);
+        
+                const canvas = await html2canvas(tempWrapper, {
+                    scale: 3,
+                    logging: true,
+                    useCORS: true,
+                    backgroundColor: null // To ensure background from .share-canvas-wrapper is used
+                });
+                console.log("Certificate rendered to canvas.");
+        
+                canvas.toBlob(async (blob) => {
+                    if (!blob) {
+                        console.error("Failed to create blob from canvas.");
+                        alert(TEXT_CONTENT.shareFailed?.zh + '\n' + TEXT_CONTENT.shareFailed?.en || 'Share failed.');
+                        if (tempWrapper && tempWrapper.parentNode) {
+                            tempWrapper.parentNode.removeChild(tempWrapper);
+                        }
+                        return;
+                    }
+        
+                    const file = new File([blob], 'quiz_certificate.png', { type: 'image/png' });
+                    console.log("Blob converted to File:", file);
+        
+                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                        try {
+                            console.log("Web Share API supported. Sharing...");
+                            await navigator.share({
+                                files: [file],
+                                title: 'My Quiz Challenge Certificate!', // Customize title
+                                // text: 'I just completed the Quiz Challenge!' // Customize text
+                            });
+                            console.log("Certificate shared successfully.");
+                        } catch (shareError) {
+                            console.error("Web Share failed:", shareError);
+                            if (shareError.name !== 'AbortError') { // Don't alert if user cancelled
+                                alert(TEXT_CONTENT.shareFailed?.zh + '\n' + TEXT_CONTENT.shareFailed?.en || 'Share failed.');
+                            }
+                        }
+                    } else {
+                        console.warn("Web Share API Level 2 not supported or cannot share files.");
+                        alert(TEXT_CONTENT.shareUnsupported?.zh + '\n' + TEXT_CONTENT.shareUnsupported?.en || 'Sharing not supported.');
+                    }
+                     if (tempWrapper && tempWrapper.parentNode) { // Ensure cleanup here too
+                        tempWrapper.parentNode.removeChild(tempWrapper);
+                        console.log("Temporary share wrapper removed.");
+                     }
+                }, 'image/png');
+        
+            } catch (error) {
+                console.error("Error rendering certificate with html2canvas:", error);
+                alert(TEXT_CONTENT.shareHtml2CanvasError?.zh + '\n' + TEXT_CONTENT.shareHtml2CanvasError?.en || 'Could not prepare image for sharing.');
+                if (tempWrapper && tempWrapper.parentNode) {
+                    tempWrapper.parentNode.removeChild(tempWrapper);
+                    console.log("Temporary share wrapper removed on error.");
+                }
+            }
+        }
 
         // --- Initial Setup and Transitions ---
 
@@ -838,6 +1018,13 @@
         continueButton.addEventListener('click', showStartScreen);
         startButton.addEventListener('click', startQuizFlow);
         modalCloseButton.addEventListener('click', hideFeedbackModal);
+        const instagramShareLink = document.getElementById('instagram-share-link');
+        if (instagramShareLink) {
+            instagramShareLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default link behavior
+                shareCertificate();     // Call the new share function
+            });
+        }
 
         // --- Initial Display ---
         welcomeScreen.classList.remove('hidden');
