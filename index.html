@@ -444,6 +444,8 @@
         const EMAILJS_TEMPLATE_ID = 'template_q69067c';
         const EMAILJS_PUBLIC_KEY = 'cDxOmMxePGWSWrLPG';
 
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwW50PjwnfDcfLS1rydXSp9Kx2uCbFNdJXLPjJyR-yUQeauTuIly5-s05lOcCIH_0tZ/exec';
+        
         // --- Bilingual Text Content ---
         const TEXT_CONTENT = {
             emailSending: { zh: "正在發送結果...", en: "Sending results..." },
@@ -802,7 +804,32 @@
          }
 
 
-        function sendResultsEmail() {
+        function sendResultsEmail() 
+        {
+            // --- Start of Google Sheet Data Preparation ---	
+		    const sheetData =
+		    {
+		        nickname: userNickname,
+                email: userEmail,
+                score: score,
+                totalQuestion: questions.length,
+                time: secondsElapsed,
+                results: userAnswers
+		    };
+
+	        fetch(APPS_SCRIPT_URL, 
+		    {
+	                method: 'POST',
+	                mode: 'no-cors', 
+	                headers: {
+	                    'Content-Type': 'application/json',
+	                },
+	                body: JSON.stringify(sheetData)
+	        })
+		    .then(res => console.log("Thank you! Your response has been saved."))
+		    .catch(err => console.log("Something went wrong!"));
+		    // --- End of Google Sheet Data Preparation ---
+            
             setEmailStatus('emailSending');
 
             const detailedResultsText = formatDetailedResults();
