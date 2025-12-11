@@ -13,7 +13,7 @@
     <link rel="icon" href="https://mikeanneso.wordpress.com/wp-content/uploads/2025/07/wedding-logo-small.png">
 	
     <style>
-        /* --- Bilingual Wedding Theme Styles --- */
+
         body {
             font-family: 'Merriweather', 'Noto Sans TC', serif;
             background: linear-gradient(to bottom, #f5f0e8, #e6dacb);
@@ -38,7 +38,7 @@
             font-family: 'Dancing Script', 'Noto Sans TC', cursive;
             color: #8d6e63;
         }
-        /* Bilingual text styling */
+
         .lang-zh {
             display: block;
             font-weight: bold;
@@ -132,7 +132,6 @@
          .modal-button .lang-en { font-size: 0.8em; color: white; }
          .modal-button:hover { background-color: #81c784; }
 
-         /* Award Certificate */
          .award-certificate {
             border: 8px double #c09b2d; padding: 2rem; margin-top: 2.5rem;
             background-color: #fffaf0; border-radius: 0.5rem;
@@ -148,15 +147,12 @@
             margin-bottom: 1.5rem;
          }
          .award-text .lang-zh, .award-text .lang-en { color: inherit; }
-         /* Style for score/time within certificate text */
+
          .award-text strong {
-             font-weight: bold; /* Keep bold */
-             color: #8d6e63; /* Use muted brown like score/time header */
-             /* No extra margin/padding needed */
+             font-weight: bold; 
+             color: #8d6e63;
          }
 
-
-         /* Logo Styling */
          .award-logo {
             display: block; width: 80px; height: 80px;
             margin: 1.5rem auto 1rem auto; border-radius: 0.25rem;
@@ -168,7 +164,6 @@
          }
           .save-the-date-text .lang-zh, .save-the-date-text .lang-en { color: inherit; }
 
-         /* Social Share Section */
          .social-share-section {
              margin-top: 2rem;
          }
@@ -183,19 +178,16 @@
 
          .social-icon-link {
              display: inline-block;
-             /* Removed color - SVG defines its own */
-             transition: opacity 0.3s ease; /* Change hover effect */
+             transition: opacity 0.3s ease;
          }
          .social-icon-link:hover {
-             opacity: 0.8; /* Slight fade on hover */
+             opacity: 0.8;
          }
          .social-icon-link svg {
-             width: 36px; /* Slightly larger icon */
+             width: 36px; 
              height: 36px;
-             /* Removed fill - SVG defines its own */
          }
 
-         /* Email Status */
         #email-status {
             margin-top: 1.5rem; margin-bottom: 1rem; font-size: 0.9rem;
             font-weight: bold; line-height: 1.4;
@@ -213,45 +205,41 @@
              border-color: #d4af37; box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
              outline: none;
         }
-        /* Score/Timer Text in Quiz Header */
+
         .score-time-header {
             font-family: 'Merriweather', 'Noto Sans TC', serif;
             font-weight: bold; color: #8d6e63;
             display: flex;
-            /* Removed flex-direction: column */
-            align-items: baseline; /* Align text baselines */
-            gap: 0.75rem; /* Add space between score and time */
+            align-items: baseline;
+            gap: 0.75rem; 
         }
-        .score-time-header > span { /* Target direct children spans (score, time) */
-             display: inline-block; /* Allow them on same line */
+        .score-time-header > span { 
+             display: inline-block; 
              line-height: 1.3;
         }
         .question-info-text { color: #a1887f; }
-        /* Helper class to hide elements */
         .hidden { display: none; }
-
-        /* === Styles for the Share Canvas in quiz.html === */
 
         .share-canvas-wrapper {
             position: absolute;
-            left: -9999px; /* Position off-screen */
+            left: -9999px; 
             top: -9999px;
-            width: 540px;   /* Instagram story width */
-            height: 960px;  /* Instagram story height */
+            width: 540px; 
+            height: 960px;  
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: #fffaf0; /* Match certificate background */
-            padding: 40px;             /* Overall padding for the canvas */
+            background-color: #fffaf0; 
+            padding: 40px;            
             box-sizing: border-box;
-            overflow: hidden;          /* Hide any overflow */
+            overflow: hidden;         
         }
         
         .share-canvas-wrapper .award-certificate {
             border: 8px double #c09b2d;
             box-shadow: none;
-            padding: 1.5rem; /* SLIGHTLY REDUCED PADDING */
+            padding: 1.5rem; 
             width: 100%;
             max-width: 100%;
             height: auto;
@@ -265,19 +253,19 @@
         }
         
         .share-canvas-wrapper .award-title {
-            font-size: 1.8rem; /* Slightly reduced */
+            font-size: 1.8rem; 
             margin-bottom: 1rem;
             line-height: 1.2;
         }
         
         .share-canvas-wrapper .award-text {
-            font-size: 0.9rem; /* Slightly reduced */
+            font-size: 0.9rem; 
             line-height: 1.5;
             margin-bottom: 1rem;
         }
         
         .share-canvas-wrapper .award-text strong {
-            font-size: 0.9rem; /* Match surrounding text */
+            font-size: 0.9rem; 
         }
         
         .share-canvas-wrapper .bottom-section {
@@ -294,23 +282,23 @@
             width: 65px;
             height: 65px;
             margin: 0;
-            order: 2; /* Logo on the right */
+            order: 2; 
             opacity: 0.8;
             filter: grayscale(50%);
         }
         
         .share-canvas-wrapper .save-the-date-text {
-            font-size: 0.75rem; /* Slightly reduced */
+            font-size: 0.75rem; 
             color: #795548;
             font-weight: normal;
             line-height: 1.3;
             margin: 0;
             text-align: left;
-            order: 1; /* Text on the left */
+            order: 1; 
             flex-grow: 1;
             padding-right: 0.5rem;
         }
-        /* === End of Styles for the Share Canvas === */
+
     </style>
 </head>
 <body>
@@ -319,7 +307,7 @@
         <div id="welcome-screen">
              <h1 class="text-4xl font-bold mb-6 romantic-font">
                 <span class="lang-zh">歡迎參加問答挑戰！</span>
-                <span class="lang-en">Welcome to the Quiz Challenge! 1</span>
+                <span class="lang-en">Welcome to the Quiz Challenge!</span>
             </h1>
             <p class="mb-5 text-gray-600" style="line-height: 1.6;">
                 <span class="lang-zh">遊戲規則：<br>1. 輸入您的姓名和電子郵件。<br>2. 回答關於我們的問題！<br>3. 完成後查看您的分數和時間。<br>4. 結果將自動發送給我們。</span>
@@ -393,10 +381,10 @@
                      <span class="lang-zh">謹將此證書頒發給<br><strong id="award-nickname-zh" class="text-lg"></strong><br>感謝您與我們一同慶祝並完成婚禮問答<br>日期：<span id="completion-date-zh"></span><br>分數：<strong id="award-score-zh"></strong>，時間：<strong id="award-time-zh"></strong> 秒</span>
                      <span class="lang-en">This certificate is happily presented to<br><strong id="award-nickname-en" class="text-lg"></strong><br>for celebrating with us and completing the Wedding Quiz on <span id="completion-date-en"></span><br>with a score of <strong id="award-score-en"></strong> and a time of <strong id="award-time-en"></strong> seconds.</span>
                  </div>
-                 <img src="https://placehold.co/80x80/e57373/ffffff?text=LOGO" alt="Logo" class="award-logo" id="award-logo" onerror="this.style.display='none'">
+                 <img src="https://mikeanneso.wordpress.com/wp-content/uploads/2025/07/wedding-logo-small.png" alt="Logo" class="award-logo" id="award-logo" onerror="this.style.display='none'">
                  <p class="save-the-date-text">
-                    <span class="lang-zh">MAS - 敬請期待 2222/02/02</span>
-                    <span class="lang-en">MAS - Save the date 2222/02/02</span>
+                    <span class="lang-zh">Mike & Anne-Sophie - 敬請期待 2026/10/24</span>
+                    <span class="lang-en">Mike & Anne-Sophie - Save the date 2026/10/24</span>
                  </p>
             </div>
 
@@ -446,8 +434,7 @@
         const EMAILJS_PUBLIC_KEY = 'cDxOmMxePGWSWrLPG';
 
         const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyk6DT3bGuDFUgUksk-dvfy0vtgiicrQcuX7Mg0VILrfSPRnetutINyJE-k4fm-nHE/exec';
-        
-        // --- Bilingual Text Content ---
+
         const TEXT_CONTENT = {
             emailSending: { zh: "正在發送結果...", en: "Sending results..." },
             emailSuccess: { zh: "結果發送成功！", en: "Results sent successfully!" },
@@ -466,10 +453,7 @@
             shareHtml2CanvasError: { zh: "無法準備分享圖片。請稍後再試。", en: "Could not prepare image for sharing. Please try again later." }
         };
 
-
-        // --- Questions Data (Bilingual) ---
         const questions = [
-             // Keep your questions here...
              {
                  question_zh: "法國的首都是什麼？",
                  question_en: "What is the capital of France?",
@@ -652,7 +636,6 @@
              }
         ];
 
-        // --- DOM Elements ---
         const welcomeScreen = document.getElementById('welcome-screen');
         const startScreen = document.getElementById('start-screen');
         const quizScreen = document.getElementById('quiz-screen');
@@ -686,8 +669,6 @@
         const shareTextZh = document.getElementById('share-text-zh');
         const shareTextEn = document.getElementById('share-text-en');
 
-
-        // --- Game State ---
         let currentQuestionIndex = 0;
         let score = 0;
         let timerInterval;
@@ -697,25 +678,28 @@
         let quizStartTime;
         let userAnswers = [];
 
-        // --- Functions ---
-
-        function startTimer() {
+        function startTimer() 
+		{
             quizStartTime = Date.now();
             secondsElapsed = 0;
             timerEl.innerHTML = `<span class="lang-zh">時間:</span><span class="lang-en">Time:</span> ${secondsElapsed}s`;
 
-            timerInterval = setInterval(() => {
+            timerInterval = setInterval(() =>
+				{
                 secondsElapsed = Math.floor((Date.now() - quizStartTime) / 1000);
                  timerEl.innerHTML = `<span class="lang-zh">時間:</span><span class="lang-en">Time:</span> ${secondsElapsed}s`;
             }, 1000);
         }
 
-        function stopTimer() {
+        function stopTimer() 
+		{
             clearInterval(timerInterval);
         }
 
-        function showQuestion(index) {
-            if (index >= questions.length) {
+        function showQuestion(index) 
+		{
+            if (index >= questions.length)
+			{
                 endQuiz();
                 return;
             }
@@ -727,7 +711,8 @@
             questionTextEn.textContent = question.question_en;
             optionsContainer.innerHTML = '';
 
-            question.options_en.forEach((optionEn, i) => {
+            question.options_en.forEach((optionEn, i) => 
+				{
                 const optionZh = question.options_zh[i];
                 const button = document.createElement('button');
                 button.classList.add('option-button');
@@ -739,7 +724,8 @@
              currentScoreDisplay.innerHTML = `<span class="lang-zh">分數:</span><span class="lang-en">Score:</span> <span id="current-score">${score}</span>`;
         }
 
-        function handleAnswer(selectedIndex, question) {
+        function handleAnswer(selectedIndex, question)
+		{
             const buttons = optionsContainer.querySelectorAll('button');
             buttons.forEach(button => button.disabled = true);
 
@@ -748,12 +734,15 @@
             let feedbackMsgZh = '';
             let feedbackMsgEn = '';
 
-            if (isCorrect) {
+            if (isCorrect) 
+			{
                 score++;
                 currentScoreDisplay.innerHTML = `<span class="lang-zh">分數:</span><span class="lang-en">Score:</span> <span id="current-score">${score}</span>`;
                 feedbackMsgZh = TEXT_CONTENT.correctFeedback.zh;
                 feedbackMsgEn = TEXT_CONTENT.correctFeedback.en;
-            } else {
+            } 
+			else
+			{
                 let feedbackIndex = selectedIndex < correctIndex ? selectedIndex : selectedIndex - 1;
                 feedbackMsgZh = question.incorrectFeedback_zh[feedbackIndex] || TEXT_CONTENT.incorrectFallback.zh;
                 feedbackMsgEn = question.incorrectFeedback_en[feedbackIndex] || TEXT_CONTENT.incorrectFallback.en;
@@ -769,24 +758,28 @@
             showFeedbackModal(feedbackMsgZh, feedbackMsgEn);
         }
 
-        function showFeedbackModal(messageZh, messageEn) {
+        function showFeedbackModal(messageZh, messageEn)
+		{
             modalMessageZh.textContent = messageZh;
             modalMessageEn.textContent = messageEn;
             feedbackModal.classList.add('show');
         }
 
-        function hideFeedbackModal() {
+        function hideFeedbackModal() 
+		{
             feedbackModal.classList.remove('show');
             currentQuestionIndex++;
             showQuestion(currentQuestionIndex);
         }
 
-        function formatDetailedResults() {
+        function formatDetailedResults()
+		{
             let resultsString = "Detailed Results:\n--------------------\n";
             userAnswers.forEach((answer, index) => {
                 resultsString += `Q${index + 1}: ${answer.question}\n`;
                 resultsString += `  Your Answer: ${answer.selectedAnswer} (${answer.isCorrect ? 'Correct' : 'Incorrect'})\n`;
-                if (!answer.isCorrect) {
+                if (!answer.isCorrect) 
+				{
                     resultsString += `  Correct Answer: ${answer.correctAnswer}\n`;
                 }
                 resultsString += "--------------------\n";
@@ -794,7 +787,8 @@
             return resultsString;
         }
 
-         function setEmailStatus(statusKey) {
+         function setEmailStatus(statusKey) 
+		 {
              const status = TEXT_CONTENT[statusKey];
              let className = 'email-sending';
              if (statusKey === 'emailSuccess') className = 'email-success';
@@ -807,7 +801,6 @@
 
         function sendResultsEmail() 
         {
-            // --- Start of Google Sheet Data Preparation ---	
 		    const sheetData =
 		    {
 		        nickname: userNickname,
@@ -829,8 +822,7 @@
 	        })
 		    .then(res => console.log("Thank you! Your response has been saved."))
 		    .catch(err => console.log("Something went wrong!"));
-		    // --- End of Google Sheet Data Preparation ---
-            
+            /*
             setEmailStatus('emailSending');
 
             const detailedResultsText = formatDetailedResults();
@@ -863,10 +855,11 @@
                    else if (error.status !== 0) errorKey = 'emailErrorConfig';
                    setEmailStatus(errorKey);
                 });
+			*/
         }
 
-
-        function endQuiz() {
+        function endQuiz() 
+		{
             stopTimer();
             quizScreen.classList.add('hidden');
             resultsScreen.classList.remove('hidden');
@@ -891,43 +884,46 @@
 
             sendResultsEmail();
 
-             try {
+             try 
+			 {
                 localStorage.setItem('quizPlayed_' + userEmail.toLowerCase(), 'true');
-             } catch (e) {
+             } 
+			 catch (e)
+			 {
                 console.warn("LocalStorage not available or failed to write.");
              }
         }
-        async function shareCertificate() {
-            console.log("Attempting to share certificate from quiz.html...");
+		
+        async function shareCertificate()
+		{
             const awardCertificateElement = document.querySelector('.award-certificate'); // Assuming this class targets your certificate
         
-            if (!awardCertificateElement) {
-                console.error("Award certificate element not found in quiz.html.");
+            if (!awardCertificateElement)
+			{
                 alert(TEXT_CONTENT.shareFailed?.zh + '\n' + TEXT_CONTENT.shareFailed?.en || 'Share failed.');
                 return;
             }
         
             let tempWrapper = null;
-            try {
+            try
+			{
                 const certificateClone = awardCertificateElement.cloneNode(true);
                 tempWrapper = document.createElement('div');
                 tempWrapper.classList.add('share-canvas-wrapper');
         
                 const clonedLogo = certificateClone.querySelector('.award-logo');
                 const clonedSaveTheDate = certificateClone.querySelector('.save-the-date-text');
-        
-                // Create the bottom section to hold logo and save the date text
+
                 const bottomSection = document.createElement('div');
                 bottomSection.classList.add('bottom-section');
         
-                if (clonedSaveTheDate && clonedSaveTheDate.parentNode) {
+                if (clonedSaveTheDate && clonedSaveTheDate.parentNode)
+				{
                     clonedSaveTheDate.parentNode.removeChild(clonedSaveTheDate);
                     bottomSection.appendChild(clonedSaveTheDate);
                 }
-                if (clonedLogo && clonedLogo.parentNode) {
-                    // Ensure the logo in the share canvas uses the intended image
-                    // If your original logo has a dynamic src or you want a specific one for sharing:
-                    // clonedLogo.src = 'URL_TO_YOUR_LOGO_FOR_SHARE'; // Replace if needed
+                if (clonedLogo && clonedLogo.parentNode)
+				{
                     clonedLogo.parentNode.removeChild(clonedLogo);
                     bottomSection.appendChild(clonedLogo);
                 }
@@ -936,19 +932,21 @@
                 tempWrapper.appendChild(certificateClone);
                 document.body.appendChild(tempWrapper);
         
-                const canvas = await html2canvas(tempWrapper, {
+                const canvas = await html2canvas(tempWrapper,
+				{
                     scale: 3,
                     logging: true,
                     useCORS: true,
-                    backgroundColor: null // To ensure background from .share-canvas-wrapper is used
+                    backgroundColor: null 
                 });
-                console.log("Certificate rendered to canvas.");
         
-                canvas.toBlob(async (blob) => {
-                    if (!blob) {
-                        console.error("Failed to create blob from canvas.");
+                canvas.toBlob(async (blob) =>
+				{
+                    if (!blob) 
+					{
                         alert(TEXT_CONTENT.shareFailed?.zh + '\n' + TEXT_CONTENT.shareFailed?.en || 'Share failed.');
-                        if (tempWrapper && tempWrapper.parentNode) {
+                        if (tempWrapper && tempWrapper.parentNode)
+						{
                             tempWrapper.parentNode.removeChild(tempWrapper);
                         }
                         return;
@@ -957,60 +955,66 @@
                     const file = new File([blob], 'quiz_certificate.png', { type: 'image/png' });
                     console.log("Blob converted to File:", file);
         
-                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                        try {
-                            console.log("Web Share API supported. Sharing...");
+                    if (navigator.canShare && navigator.canShare({ files: [file] }))
+					{
+                        try 
+						{
                             await navigator.share({
                                 files: [file],
-                                title: 'My Quiz Challenge Certificate!', // Customize title
-                                // text: 'I just completed the Quiz Challenge!' // Customize text
+                                title: 'Quiz Challenge Certificate!', 
                             });
-                            console.log("Certificate shared successfully.");
-                        } catch (shareError) {
-                            console.error("Web Share failed:", shareError);
-                            if (shareError.name !== 'AbortError') { // Don't alert if user cancelled
+                        } 
+						catch (shareError)
+						{
+                            if (shareError.name !== 'AbortError') 
+							{ 
                                 alert(TEXT_CONTENT.shareFailed?.zh + '\n' + TEXT_CONTENT.shareFailed?.en || 'Share failed.');
                             }
                         }
-                    } else {
-                        console.warn("Web Share API Level 2 not supported or cannot share files.");
+                    } 
+					else
+					{
                         alert(TEXT_CONTENT.shareUnsupported?.zh + '\n' + TEXT_CONTENT.shareUnsupported?.en || 'Sharing not supported.');
                     }
-                     if (tempWrapper && tempWrapper.parentNode) { // Ensure cleanup here too
+                    if (tempWrapper && tempWrapper.parentNode) 
+					{
                         tempWrapper.parentNode.removeChild(tempWrapper);
                         console.log("Temporary share wrapper removed.");
-                     }
+                    }
                 }, 'image/png');
         
-            } catch (error) {
-                console.error("Error rendering certificate with html2canvas:", error);
+            } 
+			catch (error) 
+			{
                 alert(TEXT_CONTENT.shareHtml2CanvasError?.zh + '\n' + TEXT_CONTENT.shareHtml2CanvasError?.en || 'Could not prepare image for sharing.');
-                if (tempWrapper && tempWrapper.parentNode) {
+                if (tempWrapper && tempWrapper.parentNode)
+				{
                     tempWrapper.parentNode.removeChild(tempWrapper);
-                    console.log("Temporary share wrapper removed on error.");
                 }
             }
         }
 
-        // --- Initial Setup and Transitions ---
-
-        function showStartScreen() {
+        function showStartScreen() 
+		{
             welcomeScreen.classList.add('hidden');
             startScreen.classList.remove('hidden');
             quizScreen.classList.add('hidden');
             resultsScreen.classList.add('hidden');
         }
 
-        function startQuizFlow() {
+        function startQuizFlow()
+		{
             userNickname = nicknameInput.value.trim();
             userEmail = emailInput.value.trim();
             startError.innerHTML = '';
 
-            if (!userNickname || !userEmail) {
+            if (!userNickname || !userEmail) 
+			{
                 startError.innerHTML = `<span class="lang-zh">${TEXT_CONTENT.errorEnterDetails.zh}</span><span class="lang-en">${TEXT_CONTENT.errorEnterDetails.en}</span>`;
                 return;
             }
-            if (!/\S+@\S+\.\S+/.test(userEmail)) {
+            if (!/\S+@\S+\.\S+/.test(userEmail))
+			{
                  startError.innerHTML = `<span class="lang-zh">${TEXT_CONTENT.errorInvalidEmail.zh}</span><span class="lang-en">${TEXT_CONTENT.errorInvalidEmail.en}</span>`;
                  return;
             }
@@ -1018,12 +1022,16 @@
             userAnswers = [];
 
             let alreadyPlayed = false;
-            try {
+            try 
+			{
                 alreadyPlayed = localStorage.getItem('quizPlayed_' + userEmail.toLowerCase()) === 'true';
-            } catch (e) {
+            } 
+			catch (e) 
+			{
                  console.warn("LocalStorage not available or failed to read.");
             }
-            if (alreadyPlayed) {
+            if (alreadyPlayed)
+			{
                  startError.innerHTML = `<span class="lang-zh">${TEXT_CONTENT.errorAlreadyPlayed.zh}</span><span class="lang-en">${TEXT_CONTENT.errorAlreadyPlayed.en}</span>`;
                  return;
             }
@@ -1047,10 +1055,12 @@
         startButton.addEventListener('click', startQuizFlow);
         modalCloseButton.addEventListener('click', hideFeedbackModal);
         const instagramShareLink = document.getElementById('instagram-share-link');
-        if (instagramShareLink) {
-            instagramShareLink.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent default link behavior
-                shareCertificate();     // Call the new share function
+        if (instagramShareLink) 
+		{
+            instagramShareLink.addEventListener('click', function(event)
+			{
+                event.preventDefault(); 
+                shareCertificate();   
             });
         }
 
@@ -1063,3 +1073,4 @@
     </script>
 </body>
 </html>
+
