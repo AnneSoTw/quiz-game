@@ -95,11 +95,15 @@
          .option-button .lang-zh { color: inherit; }
          .option-button .lang-en { font-size: 0.9em; color: inherit; }
 
-        .option-button:hover {
-            border-color: #d4af37;
-            background-color: #ffffff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
+        @media (hover: hover) 
+		{
+			.option-button:hover 
+			{
+	            border-color: #d4af37;
+	            background-color: #ffffff;
+	            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        	}
+		}
         .modal {
             position: fixed; left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(93, 64, 55, 0.7);
@@ -307,7 +311,7 @@
         <div id="welcome-screen">
              <h1 class="text-4xl font-bold mb-6 romantic-font">
                 <span class="lang-zh">歡迎參加問答挑戰！</span>
-                <span class="lang-en">Welcome to the Quiz Challenge!</span>
+                <span class="lang-en">Welcome to the Quiz Challenge!1</span>
             </h1>
             <p class="mb-5 text-gray-600" style="line-height: 1.6;">
                 <span class="lang-zh">遊戲規則：<br>1. 輸入您的姓名和電子郵件。
@@ -471,7 +475,7 @@
                  question_en: "How did Mike & Anne-Sophie meet?",
                  options_zh: ["在上班", "在線的", "在健身房", "透過朋友"],
                  options_en: ["At work", "Online", "At the gym", "Through friends"],
-                 correctAnswerIndex: 3,
+                 correctAnswerIndex: 2,
                  incorrectFeedback_zh: ["我認為我們不在同一家公司工作。", "我們年紀大了，不適合做那種事了 :)", "有可能，但不是。"],
                  incorrectFeedback_en: ["I don't think we work in same company.", "We are too old for that :)", "Could be but no."]
              },
@@ -480,7 +484,7 @@
                  question_en: "How many years Anne-Sophie has been in Taiwan?",
                  options_zh: ["8年", "11年", "13年", "15年"],
                  options_en: ["8 years", "11 years", "13 years", "15 years"],
-                 correctAnswerIndex: 4,
+                 correctAnswerIndex: 3,
                  incorrectFeedback_zh: ["太少！", "有可能，但不是。", "差不多。"],
                  incorrectFeedback_en: ["So few", "Could be but no.", "Almost"]
              },
@@ -489,7 +493,7 @@
                 question_en: "Which language do they speak to each other?",
                 options_zh: ["中文", "肢體語言", "英文", "法文"],
                 options_en: ["Chinese", "Body Language", "English", "French"],
-                correctAnswerIndex: 3,
+                correctAnswerIndex: 2,
                 incorrectFeedback_zh: ["她正在努力，也許很快就會成功。", "聽起來很不錯，我們應該試試看。", "他正在努力，也許很快就會成功。"],
                 incorrectFeedback_en: ["She is trying, maybe soon", "Sounds great, we should try", "He is trying, maybe soon"]
              },
@@ -498,7 +502,7 @@
                  question_en: "What is their common passion?",
                  options_zh: ["下國際象棋", "重訓", "電子遊戲", "購物"],
                  options_en: ["Playing chess", "Weight Training", "Video game", "Shopping"],
-                 correctAnswerIndex: 2,
+                 correctAnswerIndex: 1,
                  incorrectFeedback_zh: ["再想一想！", "當我們還年輕的時候……", "你確定嗎？"],
                  incorrectFeedback_en: ["Think a bit harder!", "When we were young...", "Are you sure?"]
              },
@@ -507,7 +511,7 @@
                  question_en: "Where was the first trip they took together?",
                  options_zh: ["法國", "日本", "菲律賓", "芬蘭"],
                  options_en: ["France", "Japan", "Philippines", "Finland"],
-                 correctAnswerIndex: 1,
+                 correctAnswerIndex: 0,
                  incorrectFeedback_zh: ["京都真是一個很棒的地方。", "馬尼拉有一些很好吃的食物。", "伊瓦洛是必去的地方。"],
                  incorrectFeedback_en: ["Kyoto is such a great place", "Manila got some good food", "Ivalo is a must go"]
              },
@@ -516,7 +520,7 @@
                  question_en: "Where is their favorite place?",
                  options_zh: ["法國", "日本", "菲律賓", "芬蘭"],
                  options_en: ["France", "Japan", "Philippines", "Finland"],
-                 correctAnswerIndex: 4,
+                 correctAnswerIndex: 3,
                  incorrectFeedback_zh: ["不完全是。", "非常接近，但還差一點。", "再想一想！"],
                  incorrectFeedback_en: ["Not really", "Very close, but not quite.", "Think a bit harder!"]
              },
@@ -525,7 +529,7 @@
                  question_en: "How many times did Mike go to  France?",
                  options_zh: ["絕不", "1次", "2次", "3次"],
                  options_en: ["Never", "1 time", "2 times", "3 times"],
-                 correctAnswerIndex: 4,
+                 correctAnswerIndex: 3,
                  incorrectFeedback_zh: ["他做了。他真的做了。", "再多一點。", "非常接近"],
                  incorrectFeedback_en: ["He did. He did.", "A little more.", "Very close"]
              },
@@ -534,7 +538,7 @@
                  question_en: "How long have they been together?",
                  options_zh: ["1年", "2年", "3年", "4年"],
                  options_en: ["1 year", "2 years", "3 years", "4 years"],
-                 correctAnswerIndex: 4,
+                 correctAnswerIndex: 3,
                  incorrectFeedback_zh: ["太少！", "有可能，但不是。", "差不多。"],
                  incorrectFeedback_en: ["So few", "Could be but no.", "Almost"]
              },
@@ -543,7 +547,7 @@
                  question_en: "What is their favorite animation?",
                  options_zh: ["七龍珠", "鬼滅之刃", "進擊的巨人", "海賊王"],
                  options_en: ["Dragon Ball", "Demon Slayer", "Attack on Titan", "One Piece"],
-                 correctAnswerIndex: 3,
+                 correctAnswerIndex: 2,
                  incorrectFeedback_zh: ["只有我們其中一個喜歡它。", "真是一部很棒的動畫。", "有點太長了。"],
                  incorrectFeedback_en: ["Only one of us like it.", "Such a great anime.", "A bit too long."]
              },
@@ -552,7 +556,7 @@
                  question_en: "What is Anne-Sophie’s favorite novel?",
                  options_zh: ["魔戒", "福爾摩斯", "飢餓遊戲", "哈利波特"],
                  options_en: ["Lord of the rings", "Sherlock Holmes", "Hunger Games", "Harry Potter"],
-                 correctAnswerIndex: 4,
+                 correctAnswerIndex: 3,
                  incorrectFeedback_zh: ["有可能，但不是。", "有可能，但不是。", "有可能，但不是。"],
                  incorrectFeedback_en: ["Could be but no.", "Could be but no.", "Could be but no."]
              },
@@ -561,7 +565,7 @@
                  question_en: "During Anne-Sophie’s competitions, what is Mike’s job?",
                  options_zh: ["攝影師", "營養師", "助理", "以上皆是"],
                  options_en: ["Photographer", "Nutrionist", "Assistant", "All of the above"],
-                 correctAnswerIndex: 4,
+                 correctAnswerIndex: 3,
                  incorrectFeedback_zh: ["他做的不止那些。", "他做的不止那些。", "他做的不止那些。"],
                  incorrectFeedback_en: ["He does more than that", "He does more than that", "He does more than that"]
              },
@@ -570,7 +574,7 @@
                  question_en: "Which color of wedding dress they didn't choose for the wedding shoot?",
                  options_zh: ["紅色", "紫色", "白色", "藍色"],
                  options_en: ["Red", "Purple", "White", "Blue"],
-                 correctAnswerIndex: 2,
+                 correctAnswerIndex: 1,
                  incorrectFeedback_zh: ["不，我們選了這個顏色。", "不，我們選了這個顏色。", "不，我們選了這個顏色。"],
                  incorrectFeedback_en: ["No, we chose this color.", "No, we chose this color.", "No, we chose this color."]
              },
@@ -579,7 +583,7 @@
                  question_en: "What does Anne-Sophie like to do but Mike does not?",
                  options_zh: ["深蹲", "法式熱吻", "相撲硬舉", "臥舉"],
                  options_en: ["Squat", "French Kiss", "Sumo Deadlift", "Bench Press"],
-                 correctAnswerIndex: 3,
+                 correctAnswerIndex: 2,
                  incorrectFeedback_zh: ["有可能，但不是。", "誰不喜歡它呢？", "有可能，但不是。"],
                  incorrectFeedback_en: ["Could be but no.", "Who doesn't like it?", "Could be but no."]
              },
@@ -588,7 +592,7 @@
                  question_en: "Which gym do they go?",
                  options_zh: ["世界健身房", "成吉思汗", "健身工廠", "我們看起來像是常去健身房的人"],
                  options_en: ["World Gym", "Genghis Khan", "Fitness Factory", "Do we look like we go to gym?"],
-                 correctAnswerIndex: 2,
+                 correctAnswerIndex: 1,
                  incorrectFeedback_zh: ["世界什麼?", "對這個地方一點也不了解。", "當然喜歡啊！你沒看到我們的肌肉嗎？"],
                  incorrectFeedback_en: ["World, what?", "No idea about this place.", "Of course we do! Don't you see our muscles?"]
              },
@@ -597,7 +601,7 @@
                  question_en: "Where did the proposal happen?",
                  options_zh: ["飯店", "在家裡", "陽明山", "餐廳"],
                  options_en: ["Hotel", "At Home", "Yangmingshan", "Restaurant"],
-                 correctAnswerIndex: 3,
+                 correctAnswerIndex: 2,
                  incorrectFeedback_zh: ["有可能，但不是。", "那一點也不浪漫。", "有可能，但不是。"],
                  incorrectFeedback_en: ["Could be but no.", "That's not romantic", "Could be but no."]
              }
